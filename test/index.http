@@ -1,0 +1,48 @@
+#------------------Merchants-----------
+### admin
+POST http://localhost:3000/merchants
+### admin
+PUT http://localhost:3000/merchants/id
+### admin
+GET http://localhost:3000/merchants
+### admin
+GET http://localhost:3000/merchants/id
+### admin
+DELETE http://localhost:3000/merchants/id
+
+#Users
+### public user
+POST http://localhost:3000/users
+
+### registered user
+PUT http://localhost:3000/users/id
+### registered user
+DELETE http://localhost:3000/users/id
+
+### merchant
+GET http://localhost:3000/users/city
+
+
+#Webpages
+### merchants
+POST http://localhost:3000/webpages
+### merchants
+PUT http://localhost:3000/webpages/id
+### merchants
+POST http://localhost:3000/webpages/photos
+### merchants
+POST http://localhost:3000/webpages/texts
+### merchants
+DELETE http://localhost:3000/webpages/id
+
+### users public and registered
+GET http://localhost:3000/webpages
+### users public and registered
+GET http://localhost:3000/webpages/id
+### users public and registered
+GET http://localhost:3000/webpages/search/city
+### users public and registered
+GET http://localhost:3000/webpages/search/city/activity
+
+### registered users only
+PATCH http://localhost:3000/webpages/id

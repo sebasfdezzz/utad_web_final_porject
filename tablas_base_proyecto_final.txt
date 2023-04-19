@@ -1,0 +1,110 @@
+Users (admin, merchants, registered user)
+- __id
+- id
+- name
+- email
+- password
+- age
+- city
+- interests
+- acceptRecievingOffers
+- role [enum]
+
+Business
+- __id
+- id
+- merchant_id
+- Business name
+- CIF
+- Address
+- email
+- phone number
+- city
+- activity
+- title
+- summary
+- texts (obj)
+- images (obj)
+- scoring
+- number of reviews
+- reviews (obj)
+- webpage_id
+--------------------------------------------------------------------------------------------------------------------
+merchants
+- __id
+- name
+- CIF
+- address
+- email
+- phone_num
+- webpage_id
+
+webpages
+- __id
+- merchant_id
+- city
+- activity
+- title
+- summary
+- texts
+- images
+- scoring
+- number of reviews
+- reviews
+
+users
+- __id
+- name
+- email
+- password
+- age
+- city
+- interests
+- allow_receiving_offers
+- role
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
