@@ -1,7 +1,10 @@
 const usersModel = require('../models/users');
+const { encrypt, compare } = require("../utils/handlePassword");
+const { tokenSign } = require("../utils/handleJWT");
+const { handleHttpError } = require("../utils/handleError")
 
 const createUser = async (req,res)=>{
-    res.send('se ha creado un usuario');
+    res.send('se ha modificado un usuario');
 }
 
 const updateUser = async (req,res)=>{

@@ -31,12 +31,12 @@ const usersScheme = new mongoose.Schema(
         },
         acceptRecievingOffers: {
             type: Boolean
+        },
+        role:{
+            type: String,
+            enum: ["user", "admin", "merchant"],
+            default: "user"
         }
-        // role:{
-        //     type: String,
-        //     enum: ["user", "admin", "merchant"],
-        //     default: "user"
-        // }
     },
     {
         timestamps: true,

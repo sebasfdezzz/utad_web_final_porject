@@ -1,3 +1,5 @@
+# token admin: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
+
 #------------------Merchants-----------
 ### admin
 POST http://localhost:3000/merchants
@@ -12,7 +14,15 @@ DELETE http://localhost:3000/merchants/id
 
 #Users
 ### public user
-POST http://localhost:3000/users
+POST http://localhost:3000/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "SebasAdmin",
+    "email": "admin@admin.com",
+    "password": "admin",
+    "role": "admin"
+}
 
 ### registered user
 PUT http://localhost:3000/users/id
