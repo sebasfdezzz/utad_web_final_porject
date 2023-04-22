@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {createUser, updateUser, deleteUser, getFromCity} = require('../controllers/users');
 
+
 //---------------------public users-------------------------
 router.post('/', createUser); //para que los public users se registren
 

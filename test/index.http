@@ -3,6 +3,7 @@
 #------------------Merchants-----------
 ### admin
 POST http://localhost:3000/merchants
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
 ### admin
 PUT http://localhost:3000/merchants/id
 ### admin

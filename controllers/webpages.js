@@ -20,6 +20,8 @@ const deleteWebpage = async (req,res)=>{
     res.send('se ha borrado una pagina');
 }
 
+
+//sin validator
 const getWebpages = async (req,res)=>{
     res.send('se han obtenido todas las paginas');
 }
@@ -35,6 +37,8 @@ const getByCity = async (req,res)=>{
 const getByCityAndActivity = async (req,res)=>{
     res.send('se ha buscado paginas por ciudad y actividad');
 }
+
+
 
 const addReview = async (req,res)=>{
     res.send('se ha agregado una reseña');
