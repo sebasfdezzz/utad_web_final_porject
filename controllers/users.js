@@ -5,9 +5,25 @@ const { tokenSign } = require("../utils/handleJWT");
 const { handleHttpError } = require("../utils/handleError");
 const users = require('../models/users');
 
-const createMerchantUser = async (req, res) => {
+async function createMerchantUser(res, name, email){
     try{
-        const body = matchedData(req);
+        const body = {
+            'name': name,
+            'email': email,
+            'role': 'merchant'
+        }
+        const dataUser = await usersModel.create(body);
+        const token = await tokenSign(dataUser);
+        return token;
+    }catch(err) {
+        console.log(err);
+        handleHttpError(res, "ERROR_REGISTER_USER");
+    }
+}
+//sin validator
+const createUser = async (req,res)=>{
+    try{
+        const body = req.body;
         const dataUser = await usersModel.create(body);
         const data = {
             token: await tokenSign(dataUser),
@@ -18,10 +34,6 @@ const createMerchantUser = async (req, res) => {
         console.log(err);
         handleHttpError(res, "ERROR_REGISTER_USER");
     }
-}
-//sin validator
-const createUser = async (req,res)=>{
-    res.send('se ha creado un usuario');
 }
 
 const updateUser = async (req,res)=>{
@@ -36,4 +48,4 @@ const getFromCity = async (req,res)=>{
     res.send('se ha regresado usuarios de una ciudad');
 }
 
-module.exports = {createUser, updateUser, deleteUser, getFromCity};
+module.exports = {createUser, updateUser, deleteUser, getFromCity, createMerchantUser};

@@ -2,8 +2,10 @@ const express = require("express");
 const router = express.Router();
 const {createWebpage, updateWebpage,uploadImage,uploadText,deleteWebpage,getWebpages,getWebpage, getByCity, getByCityAndActivity, addReview} = require('../controllers/webpages');
 
+//----------------admin--------------------------------------
+//router.post('/', createWebpage); //para dar de alta su pagina (accesible por admins) porque al crear un merchant se crea la pagina y se le da el id al merchant
+
 //-----------------merchants----------------------------------
-router.post('/', createWebpage); //para dar de alta su pagina (accesible por merchants)
 router.put('/:id', updateWebpage); //para modificar su pagina (accesible por merchants)
 router.post('/photos/', uploadImage); //para agregar fotos a una pagina (accesible por merchants)
 router.post('/texts/', uploadText); //para agregar fotos a una pagina (accesible por merchants)

@@ -1,7 +1,9 @@
 const webpagesModel = require('../models/webpages');
 
-const createWebpage = async (req,res)=>{
-    res.send('se ha creado una pagina');
+async function createWebpage(){
+    const dataWebpage = await webpagesModel.create({});
+    const webpage_id = dataWebpage._id;
+    return webpage_id;
 }
 
 const updateWebpage = async (req,res)=>{
@@ -19,7 +21,6 @@ const uploadText = async (req,res)=>{
 const deleteWebpage = async (req,res)=>{
     res.send('se ha borrado una pagina');
 }
-
 
 //sin validator
 const getWebpages = async (req,res)=>{
