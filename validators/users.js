@@ -18,6 +18,7 @@ const validatorCreateUpdate = [
     check("city").exists().notEmpty(),
     check("interests").exists().isArray(),
     check("acceptRecievingOffers").exists().notEmpty().isBoolean(),
+    check("role").isEmpty(), //no se si sirva esto pero es para que no se le pase ese valor nunca a la peticion, solo lo puede cambiar el metodo que registra merchants
     (req, res, next) => {
         return validateResults(req, res, next)
     }
@@ -38,10 +39,10 @@ const validatorGetUserByCity = [
     }
 ]
 
-const validatorDelete = [
+const validatorId = [
     check("id").exists().notEmpty().isMongoId(),
     (req, res, next) => {
         return validateResults(req, res, next)
     }
 ]
-module.exports = { validatorCreateUpdate, validatorLogin, validatorGetUserByCity, validatorDelete }
+module.exports = { validatorCreateUpdate, validatorLogin, validatorGetUserByCity, validatorId }

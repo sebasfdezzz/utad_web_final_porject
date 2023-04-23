@@ -44,18 +44,19 @@ const updateMerchant = async (req,res)=>{
 
 const getMerchants = async (req,res)=>{
     try{
-        const data = merchantsModel.find({});
+        const data = await merchantsModel.find({});
+        console.log(data);
         res.send(data);
     }catch(err){
         console.log(err);
-        handleHttpError(res, 'ERROR_GETING_MERCHANTS');
+        handleHttpError(res, 'ERROR_GETTING_MERCHANTS');
     }
 }
 
 const getMerchant = async (req,res)=>{
     try{
         const {id} = matchedData(req);
-        const data = merchantsModel.findById(id);
+        const data = await merchantsModel.findById(id);
         res.send(data);
     }catch(err){
         console.log(err);
@@ -66,7 +67,7 @@ const getMerchant = async (req,res)=>{
 const deleteMerchant = async (req,res)=>{
     try{
         const {id} = matchedData(req);
-        const data = merchantsModel.findByIdAndDelete(id);
+        const data = await merchantsModel.deleteOne({_id:id})
         res.send(data);
     }catch(err){
         console.log(err);

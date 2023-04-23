@@ -1,4 +1,6 @@
 # token admin: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
+# token mcdonalds: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ1OWE5Njk1NDQ2MGExNjFlZWUyMjkiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIyODMxNTh9.0bWbgxYk3imr2R4PmUdO9SxYOmXzpPnPE27YL7rQz1o
+
 
 #------------------Merchants-----------
 ### admin
@@ -7,11 +9,11 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
 
 {
-    "name": "BurgerKing",
-    "CIF": "burger123456",
-    "address": "Gran via 59",
-    "email": "burger_granVia@comida.com",
-    "phone_num": "+34 123 456798"
+    "name": "McDonalds",
+    "CIF": "mac123456",
+    "address": "Gran via 38",
+    "email": "mcsonalds_granVia@comida.com",
+    "phone_num": "+34 123 456789"
 }
 ### admin
 PUT http://localhost:3000/merchants/6445253a862e1ce2e47368af
@@ -19,41 +21,78 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
 
 {
-    "name": "BurgerKingUpdateado",
+    "name": "BurgerUpdateado",
     "CIF": "burger123456",
-    "address": "Gran via 59",
+    "address": "Gran via 57",
     "email": "burger_granVia@comida.com",
     "phone_num": "+34 123 456798"
 }
 ### admin
 GET http://localhost:3000/merchants
-### admin
-GET http://localhost:3000/merchants/id
-### admin
-DELETE http://localhost:3000/merchants/id
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
 
-#Users
+### admin
+GET http://localhost:3000/merchants/64459a96954460a161eee22d
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
+
+### admin
+DELETE http://localhost:3000/merchants/64459a96954460a161eee22d
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
+
+
+
+
+
+
+
+
+#----------------------------Users-----------------------
 ### public user
 POST http://localhost:3000/users HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "SebasAdmin",
-    "email": "admin@admin.com",
-    "password": "admin",
-    "role": "admin"
+    "name": "Sebastian",
+    "email": "sebastian@test.com",
+    "password": "sebastian123",
+    "age": 21,
+    "city": "madrid",
+    "interests": ["comida", "deportes"],
+    "acceptRecievingOffers": true
 }
 
 ### registered user
-PUT http://localhost:3000/users/id
+PUT http://localhost:3000/users/
+Content-Type: application/json
+
+{
+    "name": "Sebastian Nuevo",
+    "email": "sebastian@test.com",
+    "password": "sebastian123",
+    "age": 21,
+    "city": "madrid",
+    "interests": ["comida", "deportes", "ocio"],
+    "acceptRecievingOffers": false
+}
 ### registered user
-DELETE http://localhost:3000/users/id
+DELETE http://localhost:3000/users/
+Content-Type: application/json
 
+{
+    "email": "sebastian@test.com",
+    "password": "sebastian123",
+}
 ### merchant
-GET http://localhost:3000/users/city
+GET http://localhost:3000/users/madrid
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ1OWE5Njk1NDQ2MGExNjFlZWUyMjkiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIyODMxNTh9.0bWbgxYk3imr2R4PmUdO9SxYOmXzpPnPE27YL7rQz1o
 
 
-#Webpages
+
+
+
+
+
+#--------------------------Webpages----------------------------
 ### merchants
 POST http://localhost:3000/webpages
 ### merchants
