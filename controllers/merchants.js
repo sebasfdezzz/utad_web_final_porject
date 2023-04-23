@@ -29,21 +29,17 @@ const createMerchant = async (req,res)=>{
 
 const updateMerchant = async (req,res)=>{
     try{
-        const {id, ...body} = matchedData(req) 
-        const merchantJWT = await updateMerchant(res, body.name, body.email); //se crea el user con role de merchant y regresa JWT
-        const webpage_id = await createWebpage(); //se crea webpage y regresa id
-        body.webpage_id = webpage_id; // se agrega la propiedad de webpage id al body
-        const dataMerchant = await merchantsModel.create(body); //se crea finalmente el merchant
-    
-        const returnData = {
-            merchantJWT: merchantJWT,
-            webpage_id: webpage_id,
-            merchant: dataMerchant
-        }
-        res.send(returnData);
+        const {id, ...body} = matchedData(req);
+        const {webpage_id} = await merchantsModel.findById(id);
+        //agregar propiedades que no se le pasan normalmente
+        body.webpage_id = webpage_id;
+        
+        await merchantsModel.findByIdAndUpdate(id, body);
+        const newData = merchantsModel.findById(id);
+        res.send(newData);
     }catch(err){
         console.log(err);
-        handleHttpError(res, 'ERROR_CREATING_MERCHANT');
+        handleHttpError(res, 'ERROR_UPDATING_MERCHANT');
     }}
 
 const getMerchants = async (req,res)=>{

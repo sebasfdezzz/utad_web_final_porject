@@ -14,7 +14,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyY
     "phone_num": "+34 123 456798"
 }
 ### admin
-PUT http://localhost:3000/merchants/id
+PUT http://localhost:3000/merchants/6445253a862e1ce2e47368af
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
+
+{
+    "name": "BurgerKingUpdateado",
+    "CIF": "burger123456",
+    "address": "Gran via 59",
+    "email": "burger_granVia@comida.com",
+    "phone_num": "+34 123 456798"
+}
 ### admin
 GET http://localhost:3000/merchants
 ### admin

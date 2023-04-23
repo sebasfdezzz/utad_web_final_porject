@@ -39,7 +39,7 @@ const validatorGetUserByCity = [
 ]
 
 const validatorDelete = [
-    check("_id").exists().notEmpty().isMongoId(),
+    check("id").exists().notEmpty().isMongoId(),
     (req, res, next) => {
         return validateResults(req, res, next)
     }
