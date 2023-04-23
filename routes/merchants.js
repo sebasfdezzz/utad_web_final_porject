@@ -5,7 +5,7 @@ const {authMiddleware, checkRol} = require('../middleware/auth');
 const {validatorCreateUpdate, validatorId} = require('../validators/merchants');
 
 //---------------------admins---------------------
-router.post('/', authMiddleware, checkRol(['admin']),validatorCreateUpdate, createMerchant); //para dar de alta un negocio
+router.post('/', authMiddleware, checkRol(['admin']),validatorCreateUpdate, createMerchant); //para dar de alta un negocio, regresa merchantJWT, webpage_id y merchantData
 router.put('/:id', authMiddleware, checkRol(['admin']),validatorId ,validatorCreateUpdate, updateMerchant); //para modificar un negocio
 router.get('/', authMiddleware, checkRol(['admin']), getMerchants); //ver todos los negocios
 router.get('/:id', authMiddleware, checkRol(['admin']),validatorId, getMerchant); //consultar un negocio

@@ -12,13 +12,12 @@ const createMerchant = async (req,res)=>{
         const webpage_id = await createWebpage(); //se crea webpage y regresa id
         body.webpage_id = webpage_id; // se agrega la propiedad de webpage id al body
         const dataMerchant = await merchantsModel.create(body); //se crea finalmente el merchant
-        const updatedWebpage = await addMerchantId(webpage_id, dataMerchant._id);
+        await addMerchantId(webpage_id, dataMerchant._id); //agrega merchant_id a la webpage creada
 
         const returnData = {
             merchantJWT: merchantJWT,
             webpage_id: webpage_id,
-            merchant: dataMerchant,
-            webpage: updatedWebpage
+            merchant: dataMerchant
         }
         res.send(returnData);
     }catch(err){
@@ -31,27 +30,48 @@ const updateMerchant = async (req,res)=>{
     try{
         const {id, ...body} = matchedData(req);
         const {webpage_id} = await merchantsModel.findById(id);
-        //agregar propiedades que no se le pasan normalmente
-        body.webpage_id = webpage_id;
+        body.webpage_id = webpage_id;        //agregar webpage_id que no se le pasan en el request
         
-        await merchantsModel.findByIdAndUpdate(id, body);
-        const newData = merchantsModel.findById(id);
+        await merchantsModel.findByIdAndUpdate(id, body); //no regresa la info updateada
+        const newData = merchantsModel.findById(id); //la nueva info
+
         res.send(newData);
     }catch(err){
         console.log(err);
         handleHttpError(res, 'ERROR_UPDATING_MERCHANT');
-    }}
+    }
+}
 
 const getMerchants = async (req,res)=>{
-    res.send('se ha obtenido todos los comercios');
+    try{
+        const data = merchantsModel.find({});
+        res.send(data);
+    }catch(err){
+        console.log(err);
+        handleHttpError(res, 'ERROR_GETING_MERCHANTS');
+    }
 }
 
 const getMerchant = async (req,res)=>{
-    res.send('se ha obtenido un comercio');
+    try{
+        const {id} = matchedData(req);
+        const data = merchantsModel.findById(id);
+        res.send(data);
+    }catch(err){
+        console.log(err);
+        handleHttpError(res, 'ERROR_GETING_MERCHANT' + req.params.id);
+    }
 }
 
 const deleteMerchant = async (req,res)=>{
-    res.send('se ha borrado un comercio');
+    try{
+        const {id} = matchedData(req);
+        const data = merchantsModel.findByIdAndDelete(id);
+        res.send(data);
+    }catch(err){
+        console.log(err);
+        handleHttpError(res, 'ERROR_DELETING_MERCHANT' + req.params.id);
+    }
 }
 
 module.exports = {createMerchant, updateMerchant, getMerchant,getMerchants, deleteMerchant};

@@ -1,14 +1,14 @@
 const { check } = require("express-validator")
 const validateResults = require("../utils/handleValidator")
 
-const validatorMerchanteRegister = [
-    check("name").exists().notEmpty().isLength( {min:3, max: 99} ),
-    check("email").exists().notEmpty().isEmail(),
-    check("role").exists().notEmpty(),
-    (req, res, next) => {
-        return validateResults(req, res, next)
-    }
-]
+// const validatorMerchanteRegister = [
+//     check("name").exists().notEmpty().isLength( {min:3, max: 99} ),
+//     check("email").exists().notEmpty().isEmail(),
+//     check("role").exists().notEmpty(),
+//     (req, res, next) => {
+//         return validateResults(req, res, next)
+//     }
+// ]
 
 const validatorCreateUpdate = [
     check("name").exists().notEmpty().isLength( {min:3, max: 99} ),
@@ -44,4 +44,4 @@ const validatorDelete = [
         return validateResults(req, res, next)
     }
 ]
-module.exports = { validatorCreateUpdate, validatorLogin, validatorGetUserByCity, validatorMerchanteRegister, validatorDelete }
+module.exports = { validatorCreateUpdate, validatorLogin, validatorGetUserByCity, validatorDelete }
