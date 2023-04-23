@@ -1,6 +1,12 @@
 const { check } = require("express-validator")
 const validateResults = require("../utils/handleValidator")
 
+const validatorCreate = [
+    check("merchant_id").exists().notEmpty().isMongoId(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
 
 const validatorImage = [
     check("images").exists().notEmpty(),
@@ -38,4 +44,4 @@ const validatorGetByCityAndActivity = [
     }
 ]
 
-module.exports = {validatorGetByCity, validatorGetByCityAndActivity, validatorId, validatorImage, validatorTexts}
+module.exports = {validatorGetByCity, validatorGetByCityAndActivity, validatorId, validatorImage, validatorTexts, validatorCreate}

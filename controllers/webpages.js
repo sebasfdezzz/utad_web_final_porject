@@ -6,6 +6,14 @@ async function createWebpage(){
     return webpage_id;
 }
 
+async function addMerchantId(id, merchant_id){
+    const body = await webpagesModel.findById(id);
+    body.merchant_id = merchant_id;
+    await webpagesModel.findByIdAndUpdate(id, body); //no regresa la info updateada
+    const newDataWebpage = await webpagesModel.findById(id);
+    return newDataWebpage;
+}
+
 const updateWebpage = async (req,res)=>{
     res.send('se ha modificado una pagina');
 }
@@ -44,4 +52,4 @@ const getByCityAndActivity = async (req,res)=>{
 const addReview = async (req,res)=>{
     res.send('se ha agregado una reseña');
 }
-module.exports = {createWebpage, updateWebpage,uploadImage,uploadText,deleteWebpage,getWebpages,getWebpage, getByCity, getByCityAndActivity, addReview};
+module.exports = {createWebpage, updateWebpage,uploadImage,uploadText,deleteWebpage,getWebpages,getWebpage, getByCity, getByCityAndActivity, addReview,addMerchantId };

@@ -6,6 +6,8 @@ const {createWebpage, updateWebpage,uploadImage,uploadText,deleteWebpage,getWebp
 //router.post('/', createWebpage); //para dar de alta su pagina (accesible por admins) porque al crear un merchant se crea la pagina y se le da el id al merchant
 
 //-----------------merchants----------------------------------
+
+//check ownership comparando el id sacado del token con el merchant id que tenga la pagina
 router.put('/:id', updateWebpage); //para modificar su pagina (accesible por merchants)
 router.post('/photos/', uploadImage); //para agregar fotos a una pagina (accesible por merchants)
 router.post('/texts/', uploadText); //para agregar fotos a una pagina (accesible por merchants)

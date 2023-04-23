@@ -6,9 +6,9 @@ const {validatorCreateUpdate, validatorId} = require('../validators/merchants');
 
 //---------------------admins---------------------
 router.post('/', authMiddleware, checkRol(['admin']),validatorCreateUpdate, createMerchant); //para dar de alta un negocio
-router.put('/:id', updateMerchant); //para modificar un negocio
-router.get('/', getMerchants); //ver todos los negocios
-router.get('/:id', getMerchant); //consultar un negocio
-router.delete('/:id', deleteMerchant); //borrar un negocio
+router.put('/:id', authMiddleware, checkRol(['admin']),validatorId ,validatorCreateUpdate, updateMerchant); //para modificar un negocio
+router.get('/', authMiddleware, checkRol(['admin']), getMerchants); //ver todos los negocios
+router.get('/:id', authMiddleware, checkRol(['admin']),validatorId, getMerchant); //consultar un negocio
+router.delete('/:id', authMiddleware, checkRol(['admin']),validatorId, deleteMerchant); //borrar un negocio
 
 module.exports = router;
