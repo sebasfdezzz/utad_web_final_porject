@@ -32,11 +32,11 @@ GET http://localhost:3000/merchants
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
 
 ### admin
-GET http://localhost:3000/merchants/64459a96954460a161eee22d
+GET http://localhost:3000/merchants/6445a1c4cb2e1e1368c381eb
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
 
 ### admin
-DELETE http://localhost:3000/merchants/64459a96954460a161eee22d
+DELETE http://localhost:3000/merchants/6445a1c4cb2e1e1368c381eb
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
 
 

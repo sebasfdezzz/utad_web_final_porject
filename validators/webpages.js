@@ -8,19 +8,6 @@ const validatorCreate = [
     }
 ]
 
-const validatorImage = [
-    check("images").exists().notEmpty(),
-    (req, res, next) => {
-        return validateResults(req, res, next)
-    }
-]
-
-const validatorTexts = [
-    check("texts").exists().isArray(),
-    (req, res, next) => {
-        return validateResults(req, res, next)
-    }
-]
 
 const validatorId = [
     check("id").exists().notEmpty().isMongoId(),
@@ -44,4 +31,12 @@ const validatorGetByCityAndActivity = [
     }
 ]
 
-module.exports = {validatorGetByCity, validatorGetByCityAndActivity, validatorId, validatorImage, validatorTexts, validatorCreate}
+const validatorReview = [
+    check("score").exists().notEmpty().isNumeric(),
+    check("opinion").exists().notEmpty(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+module.exports = {validatorGetByCity, validatorGetByCityAndActivity, validatorId, validatorCreate, validatorReview}

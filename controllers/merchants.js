@@ -1,6 +1,6 @@
 const merchantsModel = require('../models/merchants');
 const { matchedData } = require("express-validator");
-const {createMerchantUser} = require('../controllers/users');
+const {createMerchantUser, deleteMerchantUser} = require('../controllers/users');
 const {createWebpage, addMerchantId} = require('../controllers/webpages');
 const { handleHttpError } = require('../utils/handleError');
 
@@ -67,12 +67,25 @@ const getMerchant = async (req,res)=>{
 const deleteMerchant = async (req,res)=>{
     try{
         const {id} = matchedData(req);
-        const data = await merchantsModel.deleteOne({_id:id})
-        res.send(data);
+        const data = await merchantsModel.findById(id);
+        const responseMerchantDelete = await merchantsModel.deleteOne({_id:id});
+        const responseUserDelete = await deleteMerchantUser(res, data.name, data.email); // borrar el user creado
+        const responseWebpageDelete = await sendRequest('http://localhost:3000/webpages/'+data.webpage_id)//borrar la webpage correspondiente
+        
+        const response = {
+            merchantDelete: responseMerchantDelete,
+            userDelete: responseUserDelete,
+            webpageDelete: responseWebpageDelete
+        }
+        res.send(response);
     }catch(err){
         console.log(err);
         handleHttpError(res, 'ERROR_DELETING_MERCHANT' + req.params.id);
     }
 }
 
+async function sendRequest(url){
+    let response = await fetch(url);
+    return await response.json();
+}
 module.exports = {createMerchant, updateMerchant, getMerchant,getMerchants, deleteMerchant};

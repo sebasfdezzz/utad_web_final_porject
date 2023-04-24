@@ -31,10 +31,12 @@ const webpagesScheme = new mongoose.Schema(
             type: [String]
         },
         scoring: {
-            type: Number
+            type: Number,
+            default: 0
         },
         number_of_reviews: {
-            type: Number
+            type: Number,
+            default: 0
         },
         reviews: {
             scores: {

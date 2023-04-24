@@ -27,7 +27,8 @@ const merchantsScheme = new mongoose.Schema(
             type: String
         },
         webpage_id: {
-            type: mongoose.Types.ObjectId
+            type: mongoose.Types.ObjectId,
+            unique: true
         }
     },
     {

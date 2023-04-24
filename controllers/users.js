@@ -21,6 +21,17 @@ async function createMerchantUser(res, name, email){
     }
 }
 
+async function deleteMerchantUser(res, name, email){
+    try{
+        const {_id} = await usersModel.find({name: name, email: email});
+        const data = await usersModel.deleteOne({_id: _id});
+        return data;
+    }catch(err) {
+        console.log(err);
+        handleHttpError(res, "ERROR_REGISTER_USER");
+    }
+}
+
 const createUser = async (req,res)=>{
     try{
         req = matchedData(req);
@@ -82,4 +93,4 @@ const getFromCity = async (req,res)=>{
     }
 }
 
-module.exports = {createUser, updateUser, deleteUser, getFromCity, createMerchantUser};
+module.exports = {createUser, updateUser, deleteUser, getFromCity, createMerchantUser, deleteMerchantUser};
