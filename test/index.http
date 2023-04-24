@@ -1,7 +1,3 @@
-# token admin: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
-# token mcdonalds: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ1OWE5Njk1NDQ2MGExNjFlZWUyMjkiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIyODMxNTh9.0bWbgxYk3imr2R4PmUdO9SxYOmXzpPnPE27YL7rQz1o
-
-
 #------------------Merchants-----------
 ### admin
 POST http://localhost:3000/merchants
@@ -16,12 +12,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyY
     "phone_num": "+34 123 456789"
 }
 ### admin
-PUT http://localhost:3000/merchants/6445253a862e1ce2e47368af
+PUT http://localhost:3000/merchants/64464d6b7a32395ca884175b
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
 
 {
-    "name": "BurgerUpdateado",
+    "name": "BurgerUpdateado2",
     "CIF": "burger123456",
     "address": "Gran via 57",
     "email": "burger_granVia@comida.com",
@@ -32,11 +28,11 @@ GET http://localhost:3000/merchants
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
 
 ### admin
-GET http://localhost:3000/merchants/6445a1c4cb2e1e1368c381eb
+GET http://localhost:3000/merchants/644657f568134591903d9787
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
 
 ### admin
-DELETE http://localhost:3000/merchants/6445a1c4cb2e1e1368c381eb
+DELETE http://localhost:3000/merchants/644657e368134591903d9778
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
 
 
@@ -52,12 +48,12 @@ POST http://localhost:3000/users HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Sebastian",
-    "email": "sebastian@test.com",
-    "password": "sebastian123",
-    "age": 21,
-    "city": "madrid",
-    "interests": ["comida", "deportes"],
+    "name": "Sebastian usuario 2",
+    "email": "sebastian2@test.com",
+    "password": "sebastian2123",
+    "age": 22,
+    "city": "barcelona",
+    "interests": ["musica", "fiesta"],
     "acceptRecievingOffers": true
 }
 
@@ -66,7 +62,7 @@ PUT http://localhost:3000/users/
 Content-Type: application/json
 
 {
-    "name": "Sebastian Nuevo",
+    "name": "Sebastian Nuevo3",
     "email": "sebastian@test.com",
     "password": "sebastian123",
     "age": 21,
@@ -79,12 +75,12 @@ DELETE http://localhost:3000/users/
 Content-Type: application/json
 
 {
-    "email": "sebastian@test.com",
-    "password": "sebastian123",
+    "email": "sebastian2@test.com",
+    "password": "sebastian2123"
 }
 ### merchant
 GET http://localhost:3000/users/madrid
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ1OWE5Njk1NDQ2MGExNjFlZWUyMjkiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIyODMxNTh9.0bWbgxYk3imr2R4PmUdO9SxYOmXzpPnPE27YL7rQz1o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2NTdmNTY4MTM0NTkxOTAzZDk3ODMiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIzMzE2Mzd9.jdRp7TqVvod9_CqGNJEQCWYlnPbeDEokRJbLqODQAPE
 
 
 
@@ -115,3 +111,46 @@ GET http://localhost:3000/webpages/search/city/activity
 
 ### registered users only
 PATCH http://localhost:3000/webpages/id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# token admin: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
+# token mcdonalds: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2NTdmNTY4MTM0NTkxOTAzZDk3ODMiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIzMzE2Mzd9.jdRp7TqVvod9_CqGNJEQCWYlnPbeDEokRJbLqODQAPE
+# webpage_id mcdonalds: 644657f568134591903d9785
+#merchant id mcdonalds: 644657f568134591903d9787
+# user id mcdonalds: 644657f568134591903d9783
+
+
+
+
+
+
+# {
+#     "name": "McDonalds",
+#     "CIF": "mac123456",
+#     "address": "Gran via 38",
+#     "email": "mcsonalds_granVia@comida.com",
+#     "phone_num": "+34 123 456789"
+# }
+
+# {
+#     "name": "BurgerKing",
+#     "CIF": "buger123456",
+#     "address": "Gran via 57",
+#     "email": "burger_granvia@comida.com",
+#     "phone_num": "+34 975 456789"
+# }
