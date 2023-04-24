@@ -43,23 +43,20 @@ const checkRol = (roles) => (req, res, next) => { //es necesario signear el rol 
 const loginRequired = async (req, res, next) => { //necesita que la peticion se le pase en el cuerop el email y password
     try{
         const {email, password} = matchedData(req); //no  se si lo haga bien
-
-        const user = await usersModel.find({email: email});
-
+        const user = (await usersModel.find({email: email}))[0];
         const userPass = user.password; //checar si si la esta regresando por lo del select: false
-
         const check = await compare(password, userPass);
-
         if(!check){
             handleHttpError(res, "INVALID_PASSWORD", 401);
             return;
         }
 
-        const token = tokenSign(user);
+        const token = await tokenSign(user);
         req.headers.authorization = 'Bearer ' + token;
         console.log('login session validated');
-        next()
+        next();
     }catch(err){
+        console.log(err);
         handleHttpError(res, "ERROR_PERMISSIONS", 403)
     }
 }

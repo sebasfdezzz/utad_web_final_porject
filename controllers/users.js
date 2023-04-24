@@ -36,6 +36,22 @@ async function deleteMerchantUser(res, user_id){
     }
 }
 
+async function updateMerchantUser(res,id, name, email){
+    try{
+        const newBody= {
+            'name': name,
+            'email': email,
+            'role': 'merchant'
+        }
+        //const {_id} = await usersModel.find({user_id: user_id});
+        const data = await usersModel.findByIdAndUpdate(id, newBody);
+        return data;
+    }catch(err) {
+        console.log(err);
+        handleHttpError(res, "ERROR_UPDATING_MERCHANT_USER");
+    }
+}
+
 const createUser = async (req,res)=>{
     try{
         req = matchedData(req);
@@ -57,15 +73,16 @@ const createUser = async (req,res)=>{
 
 const updateUser = async (req,res)=>{
     try{
-        const {user, ...body} = matchedData(req);
+        const user = req.user;
+        const body = matchedData(req); //Revisar que sirva esto
         const {_id} = user;
 
         const password = await encrypt(body.password);
         const newBody = {...body, password}; // Con "..." duplicamos el objeto y le añadimos o sobreescribimos una propiedad
         await usersModel.findByIdAndUpdate(_id, newBody);
 
-        const newData = usersModel.findById(_id); //la nueva info
-        //newData.set('password', undefined, { strict: false });
+        const newData = await usersModel.findById(_id); //la nueva info
+        newData.set('password', undefined, { strict: false });
 
         res.send(newData);
 
@@ -78,7 +95,7 @@ const updateUser = async (req,res)=>{
 const deleteUser = async (req,res)=>{
     try{
         const {_id} = req.user;
-        const data = merchantsModel.findByIdAndDelete(_id);
+        const data = await usersModel.deleteOne({_id: _id});
         res.send(data);
     }catch(err) {
         console.log(err);
@@ -89,7 +106,13 @@ const deleteUser = async (req,res)=>{
 const getFromCity = async (req,res)=>{
     try{
         const {city} = matchedData(req);
-        const data = await usersModel.find({city: city});
+        let data = await usersModel.find({city: city});
+
+        //user.set('password', undefined, { strict: false });
+        data = data.map(user => {
+            user.set('password', undefined, { strict: false });
+            return user;
+        });
         res.send(data);
     }catch(err) {
         console.log(err);
@@ -97,4 +120,4 @@ const getFromCity = async (req,res)=>{
     }
 }
 
-module.exports = {createUser, updateUser, deleteUser, getFromCity, createMerchantUser, deleteMerchantUser};
+module.exports = {createUser, updateUser, deleteUser, getFromCity, createMerchantUser, deleteMerchantUser,updateMerchantUser};

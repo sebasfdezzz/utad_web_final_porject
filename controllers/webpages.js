@@ -57,6 +57,16 @@ const deleteWebpage = async (req,res)=>{
     }
 }
 
+const cascadeDeleteWebpage = async (res, id)=>{
+    try{
+        const response = await webpagesModel.deleteOne({_id:id});
+        return response;
+    }catch(err){
+        console.log(res);
+        handleHttpError(res, 'ERROR_DELETING_WEBPAGE');
+    }
+}
+
 //sin validator
 const getWebpages = async (req,res)=>{
     try{
@@ -129,4 +139,4 @@ const addReview = async (req,res)=>{
         handleHttpError(res, 'ERROR_ADDING_REVIEW');
     }
 }
-module.exports = {createWebpage, updateWebpage,uploadImage,uploadText,deleteWebpage,getWebpages,getWebpage, getByCity, getByCityAndActivity, addReview,addMerchantId };
+module.exports = {createWebpage, updateWebpage,uploadImage,uploadText,deleteWebpage,getWebpages,getWebpage, getByCity, getByCityAndActivity, addReview,addMerchantId,cascadeDeleteWebpage };

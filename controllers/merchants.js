@@ -1,7 +1,7 @@
 const merchantsModel = require('../models/merchants');
 const { matchedData } = require("express-validator");
-const {createMerchantUser, deleteMerchantUser} = require('../controllers/users');
-const {createWebpage, addMerchantId} = require('../controllers/webpages');
+const {createMerchantUser, deleteMerchantUser, updateMerchantUser} = require('../controllers/users');
+const {createWebpage, addMerchantId, cascadeDeleteWebpage} = require('../controllers/webpages');
 const { handleHttpError } = require('../utils/handleError');
 
 
@@ -30,11 +30,13 @@ const createMerchant = async (req,res)=>{
 const updateMerchant = async (req,res)=>{
     try{
         const {id, ...body} = matchedData(req);
-        const {webpage_id} = await merchantsModel.findById(id);
+        const {webpage_id, user_id} = await merchantsModel.findById(id);
         body.webpage_id = webpage_id;        //agregar webpage_id que no se le pasan en el request
-        
+        body.user_id = user_id;
         await merchantsModel.findByIdAndUpdate(id, body); //no regresa la info updateada
-        const newData = merchantsModel.findById(id); //la nueva info
+        const newData = await merchantsModel.findById(id); //la nueva info
+
+        await updateMerchantUser(res, user_id, body.name, body.email); //actualizer el user asociado a este merchant
 
         res.send(newData);
     }catch(err){
@@ -71,7 +73,7 @@ const deleteMerchant = async (req,res)=>{
         const data = await merchantsModel.findById(id);
         const responseMerchantDelete = await merchantsModel.deleteOne({_id:id});
         const responseUserDelete = await deleteMerchantUser(res, data.user_id); // borrar el user creado
-        const responseWebpageDelete = await sendRequest('http://localhost:3000/webpages/'+data.webpage_id)//borrar la webpage correspondiente
+        const responseWebpageDelete = await cascadeDeleteWebpage(res, data.webpage_id); //borrar la webpage correspondiente
         
         const response = {
             merchantDelete: responseMerchantDelete,
@@ -81,12 +83,14 @@ const deleteMerchant = async (req,res)=>{
         res.send(response);
     }catch(err){
         console.log(err);
-        handleHttpError(res, 'ERROR_DELETING_MERCHANT' + req.params.id);
+        handleHttpError(res, 'ERROR_DELETING_MERCHANT_' + req.params.id);
     }
 }
 
-async function sendRequest(url){
-    let response = await fetch(url);
-    return await response.json();
-}
+// async function sendRequest(url, options = {}){
+//     let response = await fetch(url, options);
+//     return await response.json();
+// }
+
+
 module.exports = {createMerchant, updateMerchant, getMerchant,getMerchants, deleteMerchant};
