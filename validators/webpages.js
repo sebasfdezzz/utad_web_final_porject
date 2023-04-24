@@ -32,11 +32,27 @@ const validatorGetByCityAndActivity = [
 ]
 
 const validatorReview = [
-    check("score").exists().notEmpty().isNumeric(),
+    check("score").exists().notEmpty().isNumeric({min: 0, max: 5}),
     check("opinion").exists().notEmpty(),
     (req, res, next) => {
         return validateResults(req, res, next)
     }
 ]
 
-module.exports = {validatorGetByCity, validatorGetByCityAndActivity, validatorId, validatorCreate, validatorReview}
+const validatorCreateUpdate = [
+    check("scoring").isEmpty(),
+    check("number_of_reviews").isEmpty(),
+    check("reviews").exists().isEmpty(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+const validatorAddText = [
+    check("texts").exists().notEmpty().isArray(),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+module.exports = {validatorGetByCity, validatorGetByCityAndActivity, validatorId, validatorCreate,validatorAddText, validatorReview, validatorCreateUpdate}

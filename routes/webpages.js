@@ -1,19 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const {createWebpage, updateWebpage,uploadImage,uploadText,deleteWebpage,getWebpages,getWebpage, getByCity, getByCityAndActivity, addReview} = require('../controllers/webpages');
-const {validatorGetByCity, validatorGetByCityAndActivity, validatorId, validatorCreate, validatorReview} = require('../validators/webpages');
+const {createWebpage, updateWebpage,uploadImage,uploadText,deleteWebpage,getWebpages,getWebpage, getByCity, getByCityAndActivity, addReview, MerchantcreateWebpage} = require('../controllers/webpages');
+const {validatorGetByCity, validatorGetByCityAndActivity, validatorId,validatorAddText, validatorCreate, validatorReview, validatorCreateUpdate} = require('../validators/webpages');
 const {authMiddleware, checkRol, checkWebpageOwnership , loginRequired} = require('../middleware/auth');
 const {validatorLogin} = require('../validators/users');
-//----------------admin--------------------------------------
-//router.post('/', createWebpage); //para dar de alta su pagina (accesible por admins) porque al crear un merchant se crea la pagina y se le da el id al merchant
 
 //-----------------merchants----------------------------------
-
-//check ownership comparando el id sacado del token con el merchant id que tenga la pagina
-
-router.put('/:id',authMiddleware, checkRol(['merchant']), validatorId , checkWebpageOwnership ,updateWebpage); //para modificar su pagina (accesible por merchants)
-router.post('/photos/',authMiddleware, checkRol(['merchant']), uploadImage); //para agregar fotos a una pagina (accesible por merchants)
-router.post('/texts/',authMiddleware, checkRol(['merchant']), uploadText); //para agregar fotos a una pagina (accesible por merchants)
+router.post('/',authMiddleware, checkRol(['merchant']), validatorCreateUpdate, MerchantcreateWebpage); //para dar de alta su pagina en caso de que la hayan borrado, solo pueden tener uno
+router.put('/:id',authMiddleware, checkRol(['merchant']), validatorId , checkWebpageOwnership , validatorCreateUpdate,updateWebpage); //para modificar su pagina (accesible por merchants)
+router.post('/photos/:id',authMiddleware, checkRol(['merchant']),validatorId , checkWebpageOwnership, uploadImage); //para agregar fotos a una pagina (accesible por merchants)
+router.post('/texts/:id',authMiddleware, checkRol(['merchant']),validatorId , checkWebpageOwnership,validatorAddText, uploadText); //para agregar fotos a una pagina (accesible por merchants)
 router.delete('/:id',authMiddleware, checkRol(['merchant']), validatorId , checkWebpageOwnership , deleteWebpage); //para borrar su pagina (accesible por merchants)
 
 //-----------------users (public y registers)------------------

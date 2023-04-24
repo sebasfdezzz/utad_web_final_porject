@@ -91,26 +91,65 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2NTdmN
 #--------------------------Webpages----------------------------
 ### merchants
 POST http://localhost:3000/webpages
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+    "city": "madrid",
+    "activity": "comida",
+    "title": "McDonalds",
+    "summary": "Restaurante de Comida Rapida McNifica",
+    "texts": ["Prueba la nueva McCrunchy por tan solo 4.99"]    
+
+}
 ### merchants
 PUT http://localhost:3000/webpages/id
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+    "city": "madrid",
+    "activity": "comida",
+    "title": "McDonalds",
+    "summary": "Restaurante de Comida Rapida McNifica y saludable",
+    "texts": ["Prueba la nueva McCrunchy por tan solo 4.99 y por 1 euro más un helado"]    
+
+}
 ### merchants
-POST http://localhost:3000/webpages/photos
+PATCH http://localhost:3000/webpages/photos
 ### merchants
-POST http://localhost:3000/webpages/texts
+PATCH http://localhost:3000/webpages/texts/id
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+    "texts": ["McTrio por 9.99", "Miercoles con M de McNecesito una BigMac por 1.99"]    
+
+}
 ### merchants
 DELETE http://localhost:3000/webpages/id
-
+Authorization: Bearer 
 ### users public and registered
 GET http://localhost:3000/webpages
 ### users public and registered
 GET http://localhost:3000/webpages/id
 ### users public and registered
-GET http://localhost:3000/webpages/search/city
+GET http://localhost:3000/webpages/search/madrid
 ### users public and registered
-GET http://localhost:3000/webpages/search/city/activity
+GET http://localhost:3000/webpages/search/madrid/comida
 
 ### registered users only
 PATCH http://localhost:3000/webpages/id
+Authorization: Bearer 
+Content-Type: application/json
+
+{
+    "email": "sebastian2@test.com",
+    "password": "sebastian2123",
+    "score": 3.5,
+    "opinion": "habia un pelo en mi hamburguesa pero estaba rica"   
+
+}
 
 
 

@@ -1,5 +1,6 @@
 const { matchedData } = require('express-validator');
 const webpagesModel = require('../models/webpages');
+const merchantsModel = require('../models/merchants');
 const { handleHttpError } = require('../utils/handleError');
 
 async function createWebpage(){
@@ -28,6 +29,25 @@ const updateWebpage = async (req,res)=>{
     }
 }
 
+const MerchantcreateWebpage = async (req,res)=>{
+    try{
+        const user = req.user;
+        const merchant = await merchantsModel.find({user_id: user._id})[0];
+        const webpageExists = merchant.webpage_id != null;
+        if(webpageExists){
+            res.send({message: 'Este comercio ya cuenta con una pagina web', webpage_id: merchant.webpage_id});
+            return;
+        }
+        const {body} = matchedData(req);
+        body.merchant_id = merchant._id;
+        const data = await webpagesModel.create(body); 
+        res.send(data);
+    }catch(err){
+        console.log(res);
+        handleHttpError(res, 'ERROR_UPDATING_WEBPAGE');
+    }
+}
+
 const uploadImage = async (req,res)=>{
     try{
         res.send('Aqui tiene que haber otra tabla de imagenes y que tengan un id correspondiente la webpage de la que son');
@@ -39,7 +59,13 @@ const uploadImage = async (req,res)=>{
 
 const uploadText = async (req,res)=>{
     try{
-        res.send('Aqui tiene que haber otra tabla de textos y que tengan un id correspondiente la webpage de la que son');
+        const {id, texts} = matchedData(req);
+
+        const current = await webpagesModel.findById(id);
+        current.texts.push(...texts);
+        await webpagesModel.findByIdAndUpdate(id, current);
+        const newData = await webpagesModel.findById(id);
+        res.send(newData);
     }catch(err){
         console.log(res);
         handleHttpError(res, 'ERROR_UPLOADING_TEXT');
@@ -49,8 +75,12 @@ const uploadText = async (req,res)=>{
 const deleteWebpage = async (req,res)=>{
     try{
         const {id} = matchedData(req);
+        const merchant = await merchantsModel.find({webpage_id: id})[0];
+        const updateMerchant = await merchantsModel.updateOne({_id: merchant._id}, {webpage_id: null});
+        
         const response = await webpagesModel.deleteOne({_id:id});
-        res.send(response);
+        
+        res.send({deleteWebpage: response, updatedMerchant: updateMerchant});
     }catch(err){
         console.log(res);
         handleHttpError(res, 'ERROR_DELETING_WEBPAGE');
@@ -139,4 +169,4 @@ const addReview = async (req,res)=>{
         handleHttpError(res, 'ERROR_ADDING_REVIEW');
     }
 }
-module.exports = {createWebpage, updateWebpage,uploadImage,uploadText,deleteWebpage,getWebpages,getWebpage, getByCity, getByCityAndActivity, addReview,addMerchantId,cascadeDeleteWebpage };
+module.exports = {createWebpage, updateWebpage,uploadImage,uploadText,deleteWebpage,getWebpages,getWebpage, getByCity, getByCityAndActivity, addReview,addMerchantId,cascadeDeleteWebpage, MerchantcreateWebpage };
