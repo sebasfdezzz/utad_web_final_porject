@@ -32,7 +32,7 @@ GET http://localhost:3000/merchants/644657f568134591903d9787
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
 
 ### admin
-DELETE http://localhost:3000/merchants/644657e368134591903d9778
+DELETE http://localhost:3000/merchants/6446b829aead544582bbcc14
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
 
 
@@ -80,7 +80,7 @@ Content-Type: application/json
 }
 ### merchant
 GET http://localhost:3000/users/madrid
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2NTdmNTY4MTM0NTkxOTAzZDk3ODMiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIzMzE2Mzd9.jdRp7TqVvod9_CqGNJEQCWYlnPbeDEokRJbLqODQAPE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2YThkZDhiOTgwY2QwMzk3ZDkyMDMiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIzNTIzNDl9.Wb7QQWJakSFEQQ4sZV9oUfNtL7C1EZx-CEUU3cVIDTk
 
 
 
@@ -91,7 +91,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2NTdmN
 #--------------------------Webpages----------------------------
 ### merchants
 POST http://localhost:3000/webpages
-Authorization: Bearer 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2YzNkMDkyNWEzOWI0OTA1NjgxNDYiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIzNTkyNDh9.Q9U0qp0hwxfVFOvMcr2IeFN0kuWqDsf8hFNwCHc-Q8g
 Content-Type: application/json
 
 {
@@ -103,8 +103,8 @@ Content-Type: application/json
 
 }
 ### merchants
-PUT http://localhost:3000/webpages/id
-Authorization: Bearer 
+PUT http://localhost:3000/webpages/6446c5f04f0f9351fe031743
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2YzNkMDkyNWEzOWI0OTA1NjgxNDYiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIzNTkyNDh9.Q9U0qp0hwxfVFOvMcr2IeFN0kuWqDsf8hFNwCHc-Q8g
 Content-Type: application/json
 
 {
@@ -116,10 +116,10 @@ Content-Type: application/json
 
 }
 ### merchants
-PATCH http://localhost:3000/webpages/photos
+PATCH http://localhost:3000/webpages/photos/id
 ### merchants
-PATCH http://localhost:3000/webpages/texts/id
-Authorization: Bearer 
+PATCH http://localhost:3000/webpages/texts/6446c5f04f0f9351fe031743
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2YzNkMDkyNWEzOWI0OTA1NjgxNDYiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIzNTkyNDh9.Q9U0qp0hwxfVFOvMcr2IeFN0kuWqDsf8hFNwCHc-Q8g
 Content-Type: application/json
 
 {
@@ -127,28 +127,26 @@ Content-Type: application/json
 
 }
 ### merchants
-DELETE http://localhost:3000/webpages/id
-Authorization: Bearer 
+DELETE http://localhost:3000/webpages/6446c3d0925a39b490568148
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2YzNkMDkyNWEzOWI0OTA1NjgxNDYiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIzNTkyNDh9.Q9U0qp0hwxfVFOvMcr2IeFN0kuWqDsf8hFNwCHc-Q8g
 ### users public and registered
 GET http://localhost:3000/webpages
 ### users public and registered
-GET http://localhost:3000/webpages/id
+GET http://localhost:3000/webpages/6446b829aead544582bbcc12
 ### users public and registered
 GET http://localhost:3000/webpages/search/madrid
 ### users public and registered
 GET http://localhost:3000/webpages/search/madrid/comida
 
 ### registered users only
-PATCH http://localhost:3000/webpages/id
-Authorization: Bearer 
+PATCH http://localhost:3000/webpages/6446c5f04f0f9351fe031743
 Content-Type: application/json
 
 {
-    "email": "sebastian2@test.com",
-    "password": "sebastian2123",
-    "score": 3.5,
-    "opinion": "habia un pelo en mi hamburguesa pero estaba rica"   
-
+    "email": "sebastian@test.com",
+    "password": "sebastian123",
+    "score": 5,
+    "opinion": "L mejor hamburguesa de la vida"
 }
 
 
@@ -168,7 +166,7 @@ Content-Type: application/json
 
 
 # token admin: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
-# token mcdonalds: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2NTdmNTY4MTM0NTkxOTAzZDk3ODMiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIzMzE2Mzd9.jdRp7TqVvod9_CqGNJEQCWYlnPbeDEokRJbLqODQAPE
+# token mcdonalds: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2YThkZDhiOTgwY2QwMzk3ZDkyMDMiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIzNTIzNDl9.Wb7QQWJakSFEQQ4sZV9oUfNtL7C1EZx-CEUU3cVIDTk
 # webpage_id mcdonalds: 644657f568134591903d9785
 #merchant id mcdonalds: 644657f568134591903d9787
 # user id mcdonalds: 644657f568134591903d9783
@@ -192,4 +190,12 @@ Content-Type: application/json
 #     "address": "Gran via 57",
 #     "email": "burger_granvia@comida.com",
 #     "phone_num": "+34 975 456789"
+# }
+
+# {
+#     "email": "sebastian2@test.com",
+#     "password": "sebastian2123",
+#     "score": 3.5,
+#     "opinion": "habia un pelo en mi hamburguesa pero estaba rica"   
+
 # }

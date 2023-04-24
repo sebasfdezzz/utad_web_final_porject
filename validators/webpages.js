@@ -40,9 +40,15 @@ const validatorReview = [
 ]
 
 const validatorCreateUpdate = [
+    check("city").optional(),
+    check("activity").optional(),
+    check("title").optional(),
+    check("summary").optional(),
+    check("texts").optional(),
+    check("images").optional(),
     check("scoring").isEmpty(),
     check("number_of_reviews").isEmpty(),
-    check("reviews").exists().isEmpty(),
+    check("reviews").isEmpty(),
     (req, res, next) => {
         return validateResults(req, res, next)
     }

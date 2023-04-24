@@ -21,7 +21,7 @@ const updateWebpage = async (req,res)=>{
     try{
         const {id, ...body} = matchedData(req); //ver que regrese axactamente mathcedData y como cambia con distintos validators
         await webpagesModel.findByIdAndUpdate(id, body); //no regresa la info updateada
-        const newData = webpagesModel.findById(id); //la nueva info
+        const newData = await webpagesModel.findById(id); //la nueva info
         res.send(newData);
     }catch(err){
         console.log(res);
@@ -32,19 +32,21 @@ const updateWebpage = async (req,res)=>{
 const MerchantcreateWebpage = async (req,res)=>{
     try{
         const user = req.user;
-        const merchant = await merchantsModel.find({user_id: user._id})[0];
-        const webpageExists = merchant.webpage_id != null;
+        const merchant = (await merchantsModel.find({user_id: user._id}))[0];
+        const webpageExists = (merchant.webpage_id != null);
         if(webpageExists){
             res.send({message: 'Este comercio ya cuenta con una pagina web', webpage_id: merchant.webpage_id});
             return;
         }
-        const {body} = matchedData(req);
+        const body = matchedData(req);
         body.merchant_id = merchant._id;
         const data = await webpagesModel.create(body); 
-        res.send(data);
+        await merchantsModel.findByIdAndUpdate(merchant._id, {webpage_id: data._id});        //pasar nuevo id a merchant
+        const updateMerchant = await merchantsModel.findById(merchant._id);
+        res.send({createdWebPage: data, updatedMerchant: updateMerchant});
     }catch(err){
         console.log(res);
-        handleHttpError(res, 'ERROR_UPDATING_WEBPAGE');
+        handleHttpError(res, 'ERROR_CREATING_WEBPAGE');
     }
 }
 
@@ -75,12 +77,13 @@ const uploadText = async (req,res)=>{
 const deleteWebpage = async (req,res)=>{
     try{
         const {id} = matchedData(req);
-        const merchant = await merchantsModel.find({webpage_id: id})[0];
-        const updateMerchant = await merchantsModel.updateOne({_id: merchant._id}, {webpage_id: null});
-        
+        const merchant = (await merchantsModel.find({webpage_id: id}))[0];
+        //const updateMerchant = await merchantsModel.updateOne({_id: merchant._id}, {webpage_id: undefined});
+        await merchantsModel.findByIdAndUpdate(merchant._id, {webpage_id: null});
+        const updatedMerchant = await merchantsModel.findById(merchant._id);
         const response = await webpagesModel.deleteOne({_id:id});
         
-        res.send({deleteWebpage: response, updatedMerchant: updateMerchant});
+        res.send({deleteWebpage: response, updatedMerchant: updatedMerchant});
     }catch(err){
         console.log(res);
         handleHttpError(res, 'ERROR_DELETING_WEBPAGE');
@@ -146,26 +149,24 @@ const getByCityAndActivity = async (req,res)=>{
 const addReview = async (req,res)=>{
     try{
         const {id, score, opinion} = matchedData(req);
-
         const {reviews, scoring, number_of_reviews} = await webpagesModel.findById(id);
 
-        opinion = req.user.name + ": " + opinion;
+        const newOpinion = req.user.name + ": " + opinion;
         reviews.scores.push(score);
-        reviews.opinions.push(opinion);
-        scoring = reviews.scores.reduce((a, b) => a + b, 0) / reviews.scores.length;
-        number_of_reviews += 1;
-
+        reviews.opinions.push(newOpinion);
+        const newScoring = reviews.scores.reduce((a, b) => a + b, 0) / reviews.scores.length;
+        const newNumber_of_reviews = number_of_reviews + 1;
         const newData = {
             reviews: reviews,
-            scoring: scoring,
-            number_of_reviews: number_of_reviews
+            scoring: newScoring,
+            number_of_reviews: newNumber_of_reviews
         }
-
-        const response = await webpagesModel.updateOne({_id: id}, {$set: newData});
-
+        await webpagesModel.findByIdAndUpdate(id, {$set: newData});
+        const response = await webpagesModel.findById(id);
+        res.send(response);
 
     }catch(err){
-        console.log(res);
+        //console.log(res);
         handleHttpError(res, 'ERROR_ADDING_REVIEW');
     }
 }

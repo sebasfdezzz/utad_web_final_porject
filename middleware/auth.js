@@ -67,7 +67,7 @@ const checkWebpageOwnership = async (req, res, next) => {
         const {user} = req;
         const id = req.params.id;
 
-        const merchantData = await merchantsModel.find({user_id: user._id});
+        const merchantData = (await merchantsModel.find({user_id: user._id}))[0];
         
         const check = merchantData.webpage_id == id;
 
