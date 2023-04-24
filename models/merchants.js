@@ -29,6 +29,10 @@ const merchantsScheme = new mongoose.Schema(
         webpage_id: {
             type: mongoose.Types.ObjectId,
             unique: true
+        },
+        user_id: {
+            type: mongoose.Types.ObjectId,
+            unique: true
         }
     },
     {

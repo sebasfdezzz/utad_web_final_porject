@@ -8,9 +8,10 @@ const { handleHttpError } = require('../utils/handleError');
 const createMerchant = async (req,res)=>{
     try{
         const body = matchedData(req);
-        const merchantJWT = await createMerchantUser(res, body.name, body.email); //se crea el user con role de merchant y regresa JWT
+        const {merchantJWT, user_id} = await createMerchantUser(res, body.name, body.email); //se crea el user con role de merchant y regresa JWT
         const webpage_id = await createWebpage(); //se crea webpage y regresa id
         body.webpage_id = webpage_id; // se agrega la propiedad de webpage id al body
+        body.user_id = user_id; //agregar el id del user que usara el merchant para autenticarse
         const dataMerchant = await merchantsModel.create(body); //se crea finalmente el merchant
         await addMerchantId(webpage_id, dataMerchant._id); //agrega merchant_id a la webpage creada
 
@@ -69,7 +70,7 @@ const deleteMerchant = async (req,res)=>{
         const {id} = matchedData(req);
         const data = await merchantsModel.findById(id);
         const responseMerchantDelete = await merchantsModel.deleteOne({_id:id});
-        const responseUserDelete = await deleteMerchantUser(res, data.name, data.email); // borrar el user creado
+        const responseUserDelete = await deleteMerchantUser(res, data.user_id); // borrar el user creado
         const responseWebpageDelete = await sendRequest('http://localhost:3000/webpages/'+data.webpage_id)//borrar la webpage correspondiente
         
         const response = {

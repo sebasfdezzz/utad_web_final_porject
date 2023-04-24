@@ -14,21 +14,25 @@ async function createMerchantUser(res, name, email){
         }
         const dataUser = await usersModel.create(body);
         const token = await tokenSign(dataUser);
-        return token;
+        const data = {
+            merchantJWT: token,
+            user_id: dataUser._id
+        }
+        return data;
     }catch(err) {
         console.log(err);
         handleHttpError(res, "ERROR_REGISTER_USER");
     }
 }
 
-async function deleteMerchantUser(res, name, email){
+async function deleteMerchantUser(res, user_id){
     try{
-        const {_id} = await usersModel.find({name: name, email: email});
-        const data = await usersModel.deleteOne({_id: _id});
+        //const {_id} = await usersModel.find({user_id: user_id});
+        const data = await usersModel.deleteOne({_id: user_id});
         return data;
     }catch(err) {
         console.log(err);
-        handleHttpError(res, "ERROR_REGISTER_USER");
+        handleHttpError(res, "ERROR_DELETING_MERCHANT_USER");
     }
 }
 
