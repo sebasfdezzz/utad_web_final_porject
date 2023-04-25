@@ -5,6 +5,7 @@ const swaggerUi = require("swagger-ui-express");
 const userRouter = require('./routes/users');
 const merchantsRouter = require('./routes/merchants');
 const webpagesRouter = require('./routes/webpages');
+const storageRouter = require('./routes/storage');
 //const swaggerSpecs = require("./docs/swagger");
 require("dotenv").config();
 const dbConnect = require("./config/mongo");
@@ -24,9 +25,12 @@ app.use(express.json());
 //     stream: loggerStream
 // })
 
+app.use(express.static("storage")); //dorectorio publico
+
 app.use("/users", userRouter);
 app.use("/merchants", merchantsRouter);
 app.use("/webpages", webpagesRouter);
+app.use('/storage',storageRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
