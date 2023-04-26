@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {createWebpage, updateWebpage,uploadImage,uploadText,deleteWebpage,getWebpages,getWebpage, getByCity, getByCityAndActivity, addReview, MerchantcreateWebpage} = require('../controllers/webpages');
-const {validatorGetByCity, validatorGetByCityAndActivity, validatorId,validatorAddText,validatorAddImages, validatorCreate, validatorReview, validatorCreateUpdate} = require('../validators/webpages');
+const {validatorGetAll,validatorGetByCity, validatorGetByCityAndActivity, validatorId,validatorAddText,validatorAddImages, validatorCreate, validatorReview, validatorCreateUpdate} = require('../validators/webpages');
 const {authMiddleware, checkRol, checkWebpageOwnership , loginRequired} = require('../middleware/auth');
 const {validatorLogin} = require('../validators/users');
 
@@ -13,7 +13,7 @@ router.patch('/texts/:id',authMiddleware, checkRol(['merchant']),validatorId , c
 router.delete('/:id',authMiddleware, checkRol(['merchant']), validatorId , checkWebpageOwnership , deleteWebpage); //para borrar su pagina (accesible por merchants)
 
 //-----------------users (public y registers)------------------
-router.get('/',getWebpages); //ver todas las paginas que hay
+router.get('/:ordenado',validatorGetAll,getWebpages); //ver todas las paginas que hay
 router.get('/:id', validatorId, getWebpage); //ver una sola pagina
 router.get('/search/:city',validatorGetByCity ,getByCity); //var las paginas de su ciudad
 router.get('/search/:city/:activity',validatorGetByCityAndActivity ,getByCityAndActivity); //var las paginas de su ciudad y de esa actividad

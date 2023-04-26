@@ -106,13 +106,14 @@ const deleteUser = async (req,res)=>{
 const getFromCity = async (req,res)=>{
     try{
         const {city} = matchedData(req);
-        let data = await usersModel.find({city: city});
+        let data = await usersModel.find({city: city, acceptRecievingOffers: true});
 
         //user.set('password', undefined, { strict: false });
-        data = data.map(user => {
-            user.set('password', undefined, { strict: false });
-            return user;
-        });
+        // data = data.map(user => {
+        //     user.set('password', undefined, { strict: false });
+        //     return user;
+        // });
+        data = data.map(user => user.email);
         res.send(data);
     }catch(err) {
         console.log(err);

@@ -5,11 +5,11 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
 
 {
-    "name": "McDonalds",
-    "CIF": "mac123456",
-    "address": "Gran via 38",
-    "email": "mcsonalds_granVia@comida.com",
-    "phone_num": "+34 123 456789"
+    "name": "TacoBell",
+    "CIF": "taco123456",
+    "address": "Gran via 76",
+    "email": "tacobell_granVia@comida.com",
+    "phone_num": "+34 123 454389"
 }
 ### admin
 PUT http://localhost:3000/merchants/64464d6b7a32395ca884175b
@@ -79,8 +79,8 @@ Content-Type: application/json
     "password": "sebastian2123"
 }
 ### merchant
-GET http://localhost:3000/users/madrid
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2YThkZDhiOTgwY2QwMzk3ZDkyMDMiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIzNTIzNDl9.Wb7QQWJakSFEQQ4sZV9oUfNtL7C1EZx-CEUU3cVIDTk
+GET http://localhost:3000/users/barcelona
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ5NGMzZjRjM2VmMDlhYzc0MDU0OTQiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODI1MjUyNDd9.oZ6DK86oYM8kEw885aEUHmtQboHqABMk_zXgY4V9wSg
 
 
 
@@ -138,7 +138,7 @@ Content-Type: application/json
 DELETE http://localhost:3000/webpages/6446c3d0925a39b490568148
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2YzNkMDkyNWEzOWI0OTA1NjgxNDYiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIzNTkyNDh9.Q9U0qp0hwxfVFOvMcr2IeFN0kuWqDsf8hFNwCHc-Q8g
 ### users public and registered
-GET http://localhost:3000/webpages
+GET http://localhost:3000/webpages/si
 ### users public and registered
 GET http://localhost:3000/webpages/6446b829aead544582bbcc12
 ### users public and registered

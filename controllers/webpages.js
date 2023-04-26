@@ -109,6 +109,12 @@ const cascadeDeleteWebpage = async (res, id)=>{
 //sin validator
 const getWebpages = async (req,res)=>{
     try{
+        const {ordenado} = matchedData(req);
+        if(ordenado){
+            const data = await webpagesModel.find({}).sort({scoring: -1});
+            res.send(data);
+            return;
+        }
         const data = await webpagesModel.find({});
         res.send(data);
     }catch(err){

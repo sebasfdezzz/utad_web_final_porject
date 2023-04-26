@@ -68,4 +68,11 @@ const validatorAddImages = [
     }
 ]
 
-module.exports = {validatorGetByCity, validatorGetByCityAndActivity, validatorId, validatorCreate,validatorAddText, validatorReview, validatorCreateUpdate, validatorAddImages}
+const validatorGetAll = [
+    check("ordenado").exists().notEmpty().isIn(['si','no']),
+    (req, res, next) => {
+        return validateResults(req, res, next)
+    }
+]
+
+module.exports = {validatorGetAll,validatorGetByCity, validatorGetByCityAndActivity, validatorId, validatorCreate,validatorAddText, validatorReview, validatorCreateUpdate, validatorAddImages}
