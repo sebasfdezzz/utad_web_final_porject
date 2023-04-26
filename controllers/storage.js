@@ -28,8 +28,6 @@ const getItem = async (req, res) => {
 
 const createItem = async (req, res) => {
     try {
-        // res.send('success');
-        // return;
         const { body, file } = req
         const fileData = { 
             filename: file.filename,
@@ -59,6 +57,5 @@ const deleteItem = async (req, res) => {
         handleHttpError(res, "ERROR_DELETE_ITEM")
     }
 }
-
 
 module.exports = { getItems, getItem, createItem, deleteItem };
