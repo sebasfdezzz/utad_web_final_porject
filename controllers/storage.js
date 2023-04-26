@@ -28,6 +28,8 @@ const getItem = async (req, res) => {
 
 const createItem = async (req, res) => {
     try {
+        // res.send('success');
+        // return;
         const { body, file } = req
         const fileData = { 
             filename: file.filename,
@@ -36,7 +38,7 @@ const createItem = async (req, res) => {
         const data = await storageModel.create(fileData)
         res.send(data)
     }catch(err) {
-        handleHttpError(res, "ERROR_DETAIL_ITEM")
+        handleHttpError(res, "ERROR_CREATE_ITEM")
     }
 }
 
@@ -54,7 +56,7 @@ const deleteItem = async (req, res) => {
         res.send(data)
     } catch(err){
         //console.log(err)
-        handleHttpError(res, "ERROR_GET_ITEM")
+        handleHttpError(res, "ERROR_DELETE_ITEM")
     }
 }
 

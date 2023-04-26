@@ -52,10 +52,16 @@ const MerchantcreateWebpage = async (req,res)=>{
 
 const uploadImage = async (req,res)=>{
     try{
-        res.send('Aqui tiene que haber otra tabla de imagenes y que tengan un id correspondiente la webpage de la que son');
+        const {id, images} = matchedData(req);
+
+        const current = await webpagesModel.findById(id);
+        current.images.push(...images);
+        await webpagesModel.findByIdAndUpdate(id, current);
+        const newData = await webpagesModel.findById(id);
+        res.send(newData);
     }catch(err){
         console.log(res);
-        handleHttpError(res, 'ERROR_UPLOADING_IMAGE');
+        handleHttpError(res, 'ERROR_UPLOADING_IMAGES');
     }
 }
 

@@ -116,7 +116,15 @@ Content-Type: application/json
 
 }
 ### merchants
-PATCH http://localhost:3000/webpages/photos/id
+PATCH http://localhost:3000/webpages/photos/6446c5f04f0f9351fe031743
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2YzNkMDkyNWEzOWI0OTA1NjgxNDYiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIzNTkyNDh9.Q9U0qp0hwxfVFOvMcr2IeFN0kuWqDsf8hFNwCHc-Q8g
+Content-Type: application/json
+
+{
+    "images": ["mcrunchy-1682520325471.jpg"," ", "bigmac-1682520163039.jpg"]    
+
+}
+
 ### merchants
 PATCH http://localhost:3000/webpages/texts/6446c5f04f0f9351fe031743
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2YzNkMDkyNWEzOWI0OTA1NjgxNDYiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIzNTkyNDh9.Q9U0qp0hwxfVFOvMcr2IeFN0kuWqDsf8hFNwCHc-Q8g
@@ -161,13 +169,14 @@ POST http://localhost:3000/storage HTTP/1.1
 Content-Type: multipart/form-data; boundary=Boundry
 
 --Boundry
-Content-Disposition: form-data; name="mcrunchy"; filename="mcrunchy.jpg"
+Content-Disposition: form-data; name="image"; filename="mcrunchy.jpg"
 Content-Type: image/jpg
 
 < ./mcrunchy.jpg
 --Boundry--
 
-
+###
+DELETE http://localhost:3000/storage/6449384add77962cfb2338df
 
 
 
