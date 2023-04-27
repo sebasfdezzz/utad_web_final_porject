@@ -6,7 +6,8 @@ const userRouter = require('./routes/users');
 const merchantsRouter = require('./routes/merchants');
 const webpagesRouter = require('./routes/webpages');
 const storageRouter = require('./routes/storage');
-//const swaggerSpecs = require("./docs/swagger");
+const loggerStream = require("./utils/handleLogger")
+const swaggerSpecs = require("./docs/swagger");
 require("dotenv").config();
 const dbConnect = require("./config/mongo");
 
@@ -15,15 +16,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs))  //DOCUMENTACION
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs))  //DOCUMENTACION
 
-// morganBody(app, {
-//     noColors: true,
-//     skip: function(req, res) {
-//         return res.statusCode < 400                                  //ERROR LOG
-//     },
-//     stream: loggerStream
-// })
+morganBody(app, {
+    noColors: true,
+    skip: function(req, res) {
+        return res.statusCode < 400                                  //ERROR LOG
+    },
+    stream: loggerStream
+})
 
 app.use(express.static("storage")); //dorectorio publico
 
