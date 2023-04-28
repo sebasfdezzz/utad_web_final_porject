@@ -63,7 +63,7 @@ const getMerchant = async (req,res)=>{
         res.send(data);
     }catch(err){
         console.log(err);
-        handleHttpError(res, 'ERROR_GETING_MERCHANT' + req.params.id);
+        handleHttpError(res, 'ERROR_GETING_MERCHANT_' + req.params.id);
     }
 }
 
@@ -86,11 +86,5 @@ const deleteMerchant = async (req,res)=>{
         handleHttpError(res, 'ERROR_DELETING_MERCHANT_' + req.params.id);
     }
 }
-
-// async function sendRequest(url, options = {}){
-//     let response = await fetch(url, options);
-//     return await response.json();
-// }
-
 
 module.exports = {createMerchant, updateMerchant, getMerchant,getMerchants, deleteMerchant};

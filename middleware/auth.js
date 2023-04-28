@@ -31,12 +31,12 @@ const checkRol = (roles) => (req, res, next) => { //es necesario signear el rol 
         const userRol = user.role;
         const checkValueRol = roles.includes(userRol);
         if (!checkValueRol) {
-            handleHttpError(res, "NOT_ALLOWED", 403);
+            handleHttpError(res, "NOT_ALLOWED", 401);
             return;
         }
         next()
     }catch(err){
-        handleHttpError(res, "ERROR_PERMISSIONS", 403);
+        handleHttpError(res, "ERROR_PERMISSIONS", 401);
     }
 }
 
@@ -57,7 +57,7 @@ const loginRequired = async (req, res, next) => { //necesita que la peticion se 
         next();
     }catch(err){
         console.log(err);
-        handleHttpError(res, "ERROR_PERMISSIONS", 403)
+        handleHttpError(res, "ERROR_PERMISSIONS", 401)
     }
 }
 
@@ -77,7 +77,7 @@ const checkWebpageOwnership = async (req, res, next) => {
         }
         next();
     }catch(err){
-        handleHttpError(res, "ERROR_PERMISSIONS", 403)
+        handleHttpError(res, "ERROR_PERMISSIONS", 401)
     }
 }
 

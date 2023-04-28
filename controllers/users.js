@@ -3,7 +3,6 @@ const { matchedData } = require("express-validator");
 const { encrypt } = require("../utils/handlePassword");
 const { tokenSign } = require("../utils/handleJWT");
 const { handleHttpError } = require("../utils/handleError");
-const users = require('../models/users');
 
 async function createMerchantUser(res, name, email){
     try{
