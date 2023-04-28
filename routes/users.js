@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const {createUser, updateUser, deleteUser, getFromCity} = require('../controllers/users');
-const { validatorCreateUpdate, validatorLogin, validatorGetUserByCity, validatorId } = require('../validators/users');
+const { validatorCreateUpdate, validatorLogin, validatorGetUserByCity } = require('../validators/users');
 const {authMiddleware, checkRol, loginRequired} = require('../middleware/auth');
 
 //---------------------public users-------------------------
+
+
 router.post('/', validatorCreateUpdate, createUser); //para que los public users se registren
 
 //---------------------registered users NO REQUIEREN JWT---------------------
