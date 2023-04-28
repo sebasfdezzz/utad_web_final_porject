@@ -7,7 +7,7 @@ const { validatorGetItem } = require('../validators/storage')
 
 /**
  * @openapi
- * /storage/
+ * /storage/:
  *  get:
  *      tags:
  *      - Storage
@@ -28,7 +28,7 @@ router.get("/", getItems)
 
 /**
  * @openapi
- * /storage/{id}
+ * /storage/{id}:
  *  get:
  *      tags:
  *      - Storage
@@ -56,7 +56,7 @@ router.get("/:id", validatorGetItem, getItem)
 
 /**
  * @openapi
- * /storage/
+ * /storage/:
  *  post:
  *      tags:
  *      - Storage
@@ -81,7 +81,7 @@ router.post("/", authMiddleware, checkRol(['merchant']), uploadMiddleware.single
 
 /**
  * @openapi
- * /storage/{id}
+ * /storage/{id}:
  *  delete:
  *      tags:
  *      - Storage

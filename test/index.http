@@ -138,7 +138,7 @@ Content-Type: application/json
 DELETE http://localhost:3000/webpages/6446c3d0925a39b490568148
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQ2YzNkMDkyNWEzOWI0OTA1NjgxNDYiLCJyb2xlIjoibWVyY2hhbnQiLCJpYXQiOjE2ODIzNTkyNDh9.Q9U0qp0hwxfVFOvMcr2IeFN0kuWqDsf8hFNwCHc-Q8g
 ### users public and registered
-GET http://localhost:3000/webpages/si
+GET http://localhost:3000/webpages?scoring=true
 ### users public and registered
 GET http://localhost:3000/webpages/6446b829aead544582bbcc12
 ### users public and registered

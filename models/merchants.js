@@ -1,14 +1,7 @@
 const mongoose = require("mongoose");
-// const { UUID } = require("bson");
-// const mongooseDelete = require("mongoose-delete");
-// const { randomUUID } = require('crypto');
 
 const merchantsScheme = new mongoose.Schema(
     {
-        // _id: {
-        //     type: UUID,
-        //     default: () => randomUUID()
-        // },
         name: {
             type: String
         },
@@ -41,5 +34,4 @@ const merchantsScheme = new mongoose.Schema(
     }
 )
 
-//merchantsScheme.plugin(mongooseDelete, {overrideMethods: "all"});
 module.exports = mongoose.model("merchants", merchantsScheme);

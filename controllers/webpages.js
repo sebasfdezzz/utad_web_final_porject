@@ -35,7 +35,7 @@ const MerchantcreateWebpage = async (req,res)=>{
         const merchant = (await merchantsModel.find({user_id: user._id}))[0];
         const webpageExists = (merchant.webpage_id != null);
         if(webpageExists){
-            res.send({message: 'Este comercio ya cuenta con una pagina web', webpage_id: merchant.webpage_id});
+            res.status(205).send({message: 'Este comercio ya cuenta con una pagina web', webpage_id: merchant.webpage_id});
             return;
         }
         const body = matchedData(req);
@@ -84,7 +84,6 @@ const deleteWebpage = async (req,res)=>{
     try{
         const {id} = matchedData(req);
         const merchant = (await merchantsModel.find({webpage_id: id}))[0];
-        //const updateMerchant = await merchantsModel.updateOne({_id: merchant._id}, {webpage_id: undefined});
         await merchantsModel.findByIdAndUpdate(merchant._id, {webpage_id: null});
         const updatedMerchant = await merchantsModel.findById(merchant._id);
         const response = await webpagesModel.deleteOne({_id:id});
@@ -109,8 +108,8 @@ const cascadeDeleteWebpage = async (res, id)=>{
 //sin validator
 const getWebpages = async (req,res)=>{
     try{
-        const {ordenado} = matchedData(req);
-        if(ordenado){
+        const scoring = req.query.scoring;
+        if(scoring){
             const data = await webpagesModel.find({}).sort({scoring: -1});
             res.send(data);
             return;
@@ -178,7 +177,7 @@ const addReview = async (req,res)=>{
         res.send(response);
 
     }catch(err){
-        //console.log(res);
+        console.log(res);
         handleHttpError(res, 'ERROR_ADDING_REVIEW');
     }
 }

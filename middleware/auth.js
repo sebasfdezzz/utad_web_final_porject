@@ -25,7 +25,7 @@ const authMiddleware = async (req, res, next) => {
     }
 }
 
-const checkRol = (roles) => (req, res, next) => { //es necesario signear el rol en el JWT?
+const checkRol = (roles) => (req, res, next) => {
     try{
         const {user} = req;
         const userRol = user.role;
@@ -42,9 +42,9 @@ const checkRol = (roles) => (req, res, next) => { //es necesario signear el rol 
 
 const loginRequired = async (req, res, next) => { //necesita que la peticion se le pase en el cuerop el email y password
     try{
-        const {email, password} = matchedData(req); //no  se si lo haga bien
+        const {email, password} = matchedData(req); 
         const user = (await usersModel.find({email: email}))[0];
-        const userPass = user.password; //checar si si la esta regresando por lo del select: false
+        const userPass = user.password;
         const check = await compare(password, userPass);
         if(!check){
             handleHttpError(res, "INVALID_PASSWORD", 401);
@@ -63,7 +63,6 @@ const loginRequired = async (req, res, next) => { //necesita que la peticion se 
 
 const checkWebpageOwnership = async (req, res, next) => {
     try{
-        // const {user, id} = matchedData(req);
         const {user} = req;
         const id = req.params.id;
 

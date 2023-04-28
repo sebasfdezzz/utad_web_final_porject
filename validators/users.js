@@ -6,11 +6,11 @@ const validatorCreateUpdate = [
     check("name").exists().notEmpty().isLength( {min:3, max: 99} ),
     check("email").exists().notEmpty().isEmail(),
     check("password").exists().notEmpty().isLength( {min:8, max: 16} ),
-    check("age").exists().notEmpty().isNumeric({min: 13, max: 150}), //Puedes aplicarle un min y max también al número
+    check("age").exists().notEmpty().isNumeric({min: 13, max: 150}),
     check("city").exists().notEmpty(),
     check("interests").exists().isArray(),
     check("acceptRecievingOffers").exists().notEmpty().isBoolean(),
-    check("role").isEmpty(), //no se si sirva esto pero es para que no se le pase ese valor nunca a la peticion, solo lo puede cambiar el metodo que registra merchants
+    check("role").isEmpty(), 
     (req, res, next) => {
         return validateResults(req, res, next)
     }

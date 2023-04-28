@@ -1,5 +1,4 @@
 const mongoose = require("mongoose")
-//const mongooseDelete = require("mongoose-delete")
 
 const StorageScheme = new mongoose.Schema(
     {
@@ -15,5 +14,4 @@ const StorageScheme = new mongoose.Schema(
         versionKey: false
     }
 )
-//StorageScheme.plugin(mongooseDelete, {overrideMethods: "all"})
-module.exports = mongoose.model("storages", StorageScheme) // Nombre de la colección (o de la tabla en SQL)
+module.exports = mongoose.model("storages", StorageScheme)

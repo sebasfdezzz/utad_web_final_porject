@@ -73,7 +73,7 @@ const createUser = async (req,res)=>{
 const updateUser = async (req,res)=>{
     try{
         const user = req.user;
-        const body = matchedData(req); //Revisar que sirva esto
+        const body = matchedData(req);
         const {_id} = user;
 
         const password = await encrypt(body.password);
@@ -106,12 +106,6 @@ const getFromCity = async (req,res)=>{
     try{
         const {city} = matchedData(req);
         let data = await usersModel.find({city: city, acceptRecievingOffers: true});
-
-        //user.set('password', undefined, { strict: false });
-        // data = data.map(user => {
-        //     user.set('password', undefined, { strict: false });
-        //     return user;
-        // });
         data = data.map(user => user.email);
         res.send(data);
     }catch(err) {

@@ -6,7 +6,7 @@ const {validatorCreateUpdate, validatorId} = require('../validators/merchants');
 
 /**
  * @openapi
- * /merchants/
+ * /merchants/:
  *  post:
  *      tags:
  *      - Merchant
@@ -19,7 +19,7 @@ const {validatorCreateUpdate, validatorId} = require('../validators/merchants');
  *                      $ref: "#/components/schemas/merchants"
  *      responses:
  *          '200':
- *              description: Returns an object containing: merchantJWT (the JWT token for the merchant created), webpage_id (for the merchant to use), and dataMerchant (the inserted object to the merchant collection)
+ *              description: Returns an object containing merchantJWT (the JWT token for the merchant created), webpage_id (for the merchant to use), and dataMerchant (the inserted object to the merchant collection)
  *          '401':
  *              description: Authorization errors
  *          '403':
@@ -31,7 +31,7 @@ router.post('/', authMiddleware, checkRol(['admin']),validatorCreateUpdate, crea
 
 /**
  * @openapi
- * /merchants/{id}
+ * /merchants/{id}:
  *  put:
  *      tags:
  *      - Merchant
@@ -44,7 +44,7 @@ router.post('/', authMiddleware, checkRol(['admin']),validatorCreateUpdate, crea
  *              required: true
  *              schema:
  *                  type: string     
- * requestBody:
+ *      requestBody:
  *          content:
  *              application/json:
  *                  schema:
@@ -63,7 +63,7 @@ router.put('/:id', authMiddleware, checkRol(['admin']),validatorId ,validatorCre
 
 /**
  * @openapi
- * /merchants/
+ * /merchants/:
  *  get:
  *      tags:
  *      - Merchant
@@ -88,7 +88,7 @@ router.get('/', authMiddleware, checkRol(['admin']), getMerchants); //ver todos 
 
 /**
  * @openapi
- * /merchants/{id}
+ * /merchants/{id}:
  *  get:
  *      tags:
  *      - Merchant
@@ -120,7 +120,7 @@ router.get('/:id', authMiddleware, checkRol(['admin']),validatorId, getMerchant)
 
 /**
  * @openapi
- * /merchants/{id}
+ * /merchants/{id}:
  *  delete:
  *      tags:
  *      - Merchant
