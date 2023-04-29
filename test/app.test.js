@@ -1,48 +1,109 @@
 const request = require('supertest');
 const app = require('../app')
 
-describe('users', () => {
+let admin_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM"
 
-    var token = ""
-    var id = ""
+describe('merchants', () => {
 
-    it('should register a user', async () => {
+    var token_burger = ""
+    var webid_burger = ""
+    var id_burger = ""
+
+    it('should register a merchant', async () => {
         const response = await request(app)
-            .post('/api/auth/register')
-            .send({"name": "Menganito","age": 20,"email": "user25@test.com","password": "HolaMundo.01"})
+            .post('/merchants/')
+            .auth(admin_token, { type: 'bearer' })
+            .send({
+                "name": "BurgerKing",
+                "CIF": "buger123456",
+                "address": "Gran via 57",
+                "email": "burger_granvia@comida.com",
+                "phone_num": "+34 975 456789"
+            })
             .set('Accept', 'application/json')
             .expect(200)
-        expect(response.body.user.name).toEqual('Menganito')
-        expect(response.body.user.email).toEqual('user25@test.com')
-        expect(response.body.user.role).toEqual('user')
+        expect(response.body.merchant.name).toEqual('BurgerKing')
+        expect(response.body.merchant.email).toEqual('burger_granvia@comida.com')
 
-        token = response.body.token
-        id = response.body.user._id
+        token_burger = response.body.merchantJWT
+        webid_burger = response.body.webpage_id
+        id_burger = response.body.merchant._id
     })
-/*
-    it('should get a Unauthorized error', async () => {
+
+    it('should get an unauthorized error', async () => {
         const response = await request(app)
-            .get('/api/auth/users')
+            .post('/merchants/')
+            .auth(token_burger, { type: 'bearer' })
+            .send({
+                "name": "BurgerKing",
+                "CIF": "buger123456",
+                "address": "Gran via 57",
+                "email": "burger_granvia@comida.com",
+                "phone_num": "+34 975 456789"
+            })
             .set('Accept', 'application/json')
             .expect(401)
     });
-*/
-    it('should get the users', async () => {
+
+    it('should update a merchant', async () => {
         const response = await request(app)
-            .get('/api/auth/users')
-            .auth(token, { type: 'bearer' })
+            .put('/merchants/'+id_burger)
+            .auth(admin_token, { type: 'bearer' })
+            .send({
+                "name": "BurgerKingUpdateado",
+                "CIF": "buger123456",
+                "address": "Gran via 57",
+                "email": "burger_granvia@comida.com",
+                "phone_num": "+34 975 456789"
+            })
             .set('Accept', 'application/json')
             .expect(200)
-        expect(response.body.pop().name).toEqual('Menganito')
+        expect(response.body.name).toEqual('BurgerKingUpdateado')
+        expect(response.body.email).toEqual('burger_granvia@comida.com')
     });
 
-    it('should delete a user', async () => {
+    it('should return validator error', async () => {
         const response = await request(app)
-            .delete('/api/auth/users/'+id)
-            .auth(token, { type: 'bearer' })
+            .put('/merchants/'+id_burger)
+            .auth(admin_token, { type: 'bearer' })
+            .send({
+                "name": "BurgerKingUpdateado",
+                "CIF": "buger123456",
+                "address": "Gran via 57",
+                "email": "burger_granvia@comida.com",
+                "phone_num": "+34 975 456789",
+                "webpage_id": "121932293",
+                "user_id": "484832934"
+            })
+            .set('Accept', 'application/json')
+            .expect(403)
+    });
+
+    it('should get all the merchants', async () => {
+        const response = await request(app)
+            .get('/merchants/')
+            .auth(admin_token, { type: 'bearer' })
+            .expect(200) 
+        expect(response.body.pop().name).toEqual('BurgerKingUpdateado')     
+    })
+
+    it('should get a the merchant (BurgerKing)', async () => {
+        const response = await request(app)
+            .get('/merchants/'+id_burger)
+            .auth(admin_token, { type: 'bearer' })
+            .expect(200) 
+        expect(response.body.name).toEqual('BurgerKingUpdateado')     
+    })
+
+    it('should delete a merchant', async () => {
+        const response = await request(app)
+            .delete('/merchants/'+id_burger)
+            .auth(admin_token, { type: 'bearer' })
             .set('Accept', 'application/json')
             .expect(200)
-        expect(response.body.acknowledged).toEqual(true)
+        expect(response.body.merchantDelete.acknowledged).toEqual(true)
+        expect(response.body.userDelete.acknowledged).toEqual(true)
+        expect(response.body.webpageDelete.acknowledged).toEqual(true)
     })
 
 })

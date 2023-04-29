@@ -7,6 +7,8 @@ const validatorCreateUpdate = [
     check("address").exists().notEmpty(),
     check("email").exists().notEmpty().isEmail(),
     check("phone_num").exists().notEmpty(),
+    check("webpage_id").isEmpty(),
+    check("user_id").isEmpty(),
     (req, res, next) => {
         return validateResults(req, res, next)
     }
