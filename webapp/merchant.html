@@ -5,8 +5,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merchant</title>
+    <link rel="stylesheet" type="text/css" href="merchant.css">
 </head>
 <body>
-    
+    <div class="container">
+        <div class="row">
+          <div class="col" id="info">
+            <h2>Comercio</h2>
+            <form id="comercio-form">
+              <label for="jwt-toke">JWT token del comercio:</label>
+              <input type="text" id="jwt-token" name="jwt-token" required><br><br>
+
+              <label for="webpage-id">Webpage ID:</label>
+              <input type="text" id="webpage-id" name="webpage-id" required><br><br>
+              
+              <label for="city">Ciudad:</label>
+              <input type="text" id="city" name="city" required><br><br>
+              
+              <label for="activity">Actividad:</label>
+              <input type="text" id="activity" name="activity" required><br><br>
+              
+              <label for="title">Titulo:</label>
+              <input type="text" id="title" name="title" required><br><br>
+              
+              <label for="summary">Resumen:</label>
+              <textarea id="summary" name="summary" required></textarea><br><br>
+              
+              <button type="submit" id="create-btn">Crear</button>
+              <button type="submit" id="update-btn">Actualizar</button>
+              <button type="submit" id="delete-btn">Borrar</button>
+            </form>
+          </div>
+          
+          <div class="col" id="uploads">
+            <!-- <h3>Upload Image</h3> -->
+            <div style="margin-top: 50px">
+                <div class="upload-row">
+                    <div class="text-image-pair">
+                        <input type="text" id="image-url" name="image-url" placeholder="Texto"><br><br>
+                        <input type="file" id="image-upload" name="image-upload" accept="image/*"><br><br>
+                        <img id="image-preview" src="#" alt="Preview">
+                    </div>
+                    <div class="text-image-pair">
+                        <input type="text" id="image-url" name="image-url" placeholder="Texto"><br><br>
+                        <input type="file" id="image-upload" name="image-upload" accept="image/*"><br><br>
+                        <img id="image-preview" src="#" alt="Preview">
+                    </div>
+                </div>
+            </div>
+            <button id="upload-pair">Subir</button>
+          </div>
+        </div>
+        
+        <div class="row" id="get-emails">
+          <div class="col">
+            <label for="city-users">Lista de emails de usuarios en: </label>
+            <input type="text" id="city-users" name="city-users" placeholder="ciudad" style="border: 2px solid black">
+          </div>
+          
+          <div class="col">
+            <button type="submit" id="city-users-btn">Obtener lista</button>
+          </div>
+        </div>
+      </div>
 </body>
+<script src="./merchant.js"></script>
 </html>

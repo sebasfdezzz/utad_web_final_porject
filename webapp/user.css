@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1a5f7adb;
+  }
+  
+  .button {
+    background-color: #002B5B;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 40px 70px;
+    border: none;
+    border-radius: 10px;
+    margin: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #87CBB9;
+    box-shadow: 0px 0px 10px #577D86;
+    transform: scale(1.1);
+  }
+  body{
+    margin: 0;
+  }
