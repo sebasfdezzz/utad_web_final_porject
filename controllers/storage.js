@@ -53,7 +53,7 @@ const deleteItem = async (req, res) => {
         }
         res.send(data)
     } catch(err){
-        //console.log(err)
+        console.log(err)
         handleHttpError(res, "ERROR_DELETE_ITEM")
     }
 }

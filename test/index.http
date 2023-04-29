@@ -169,14 +169,15 @@ POST http://localhost:3000/storage HTTP/1.1
 Content-Type: multipart/form-data; boundary=Boundry
 
 --Boundry
-Content-Disposition: form-data; name="image"; filename="mcrunchy.jpg"
+Content-Disposition: form-data; name="image"; filename="greepr.jpg"
 Content-Type: image/jpg
 
-< ./mcrunchy.jpg
+< ./greenpr.jpg
 --Boundry--
 
 ###
-DELETE http://localhost:3000/storage/6449384add77962cfb2338df
+DELETE http://localhost:3000/storage/644d8757cd7fb3e396ca0ee8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYjEyOWExY2ZiNDkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODIwODkyNjB9.nuPfxNhBMUFV3xuq2k7n63fiOY6kKixlJ62qayGjQLM
 
 
 

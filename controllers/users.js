@@ -26,7 +26,6 @@ async function createMerchantUser(res, name, email){
 
 async function deleteMerchantUser(res, user_id){
     try{
-        //const {_id} = await usersModel.find({user_id: user_id});
         const data = await usersModel.deleteOne({_id: user_id});
         return data;
     }catch(err) {
@@ -42,7 +41,6 @@ async function updateMerchantUser(res,id, name, email){
             'email': email,
             'role': 'merchant'
         }
-        //const {_id} = await usersModel.find({user_id: user_id});
         const data = await usersModel.findByIdAndUpdate(id, newBody);
         return data;
     }catch(err) {

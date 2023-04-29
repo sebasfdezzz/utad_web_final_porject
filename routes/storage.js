@@ -61,7 +61,7 @@ router.get("/:id", validatorGetItem, getItem)
  *      tags:
  *      - Storage
  *      summary: Upload an image
- *      description: A merchant can upload an image to the storage foldeer in the local device and the public url to access
+ *      description: To upload an image to the storage foldeer in the local device and the public url to access
  *      requestBody:
  *          content:
  *              application/json:
@@ -74,10 +74,8 @@ router.get("/:id", validatorGetItem, getItem)
  *              description: Authorization errors
  *          '403':
  *              description: Mongoose errors
- *      security:
- *          - bearerAuth: []
  */
-router.post("/", authMiddleware, checkRol(['merchant']), uploadMiddleware.single("image"), createItem)
+router.post("/", uploadMiddleware.single("image"), createItem)
 
 /**
  * @openapi
