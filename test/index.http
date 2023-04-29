@@ -132,7 +132,6 @@ Content-Type: application/json
 
 {
     "texts": ["McTrio por 9.99", "Miercoles con M de McNecesito una BigMac por 1.99"]    
-
 }
 ### merchants
 DELETE http://localhost:3000/webpages/6446c3d0925a39b490568148

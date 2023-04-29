@@ -49,6 +49,7 @@ const validatorCreateUpdate = [
     check("scoring").isEmpty(),
     check("number_of_reviews").isEmpty(),
     check("reviews").isEmpty(),
+    check("merchant_id").isEmpty(),
     (req, res, next) => {
         return validateResults(req, res, next)
     }

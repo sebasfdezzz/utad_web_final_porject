@@ -229,11 +229,10 @@ describe('users', () => {
 
 })
 
-describe('merchants', () => {
+describe('webpages', () => {
 
     var token_burger = ""
     var webid_burger = ""
-    var id_burger = ""
 
     it('should register a merchant', async () => {
         const response = await request(app)
@@ -256,69 +255,148 @@ describe('merchants', () => {
         id_burger = response.body.merchant._id
     })
 
-    it('should get an unauthorized error', async () => {
+    it('should return an error cause of existing webpage', async () => {
         const response = await request(app)
-            .post('/merchants/')
+            .post('/webpages/')
             .auth(token_burger, { type: 'bearer' })
             .send({
-                "name": "BurgerKing",
-                "CIF": "buger123456",
-                "address": "Gran via 57",
-                "email": "burger_granvia@comida.com",
-                "phone_num": "+34 975 456789"
+                "city": "madrid",
+                "activity": "comida",
+                "title": "Burger",
+                "summary": "Restaurante de Comida Rapida Burgerifica",
+                "texts": ["Prueba la nueva burger master"]    
+            
+            })
+            .set('Accept', 'application/json')
+            .expect(205)
+        expect(response.body.webpage_id).toEqual(webid_burger)
+    })
+
+    it('should update a webpage', async () => {
+        const response = await request(app)
+            .post('/webpages/'+webid_burger)
+            .auth(token_burger, { type: 'bearer' })
+            .send({
+                "city": "ciudadTest",
+                "activity": "comida",
+                "title": "Burger",
+                "summary": "Restaurante de Comida Rapida Burgerifica",
+                "texts": ["Prueba la nueva burger master"]    
+            })
+            .set('Accept', 'application/json')
+            .expect(200)
+        expect(response.body.title).toEqual("Burger")
+    });
+
+    it('should get an not owner error', async () => {
+        const response = await request(app)
+            .post('/webpages/'+webid_burger)
+            .auth(merchant_token, { type: 'bearer' })
+            .send({
+                "city": "ciudadTest",
+                "activity": "comida",
+                "title": "Burger",
+                "summary": "Restaurante de Comida Rapida Burgerifica",
+                "texts": ["Prueba la nueva burger master"]    
             })
             .set('Accept', 'application/json')
             .expect(401)
     });
 
-    it('should update a merchant', async () => {
+    it('should patch images', async () => {
         const response = await request(app)
-            .put('/merchants/'+id_burger)
-            .auth(admin_token, { type: 'bearer' })
+            .patch('/merchants/photos/'+id_burger)
+            .auth(token_burger, { type: 'bearer' })
             .send({
-                "name": "BurgerKingUpdateado",
-                "CIF": "buger123456",
-                "address": "Gran via 57",
-                "email": "burger_granvia@comida.com",
-                "phone_num": "+34 975 456789"
+                "images": ["mcrunchy-1682520325471.jpg"," ", "bigmac-1682520163039.jpg"]    
             })
             .set('Accept', 'application/json')
             .expect(200)
-        expect(response.body.name).toEqual('BurgerKingUpdateado')
-        expect(response.body.email).toEqual('burger_granvia@comida.com')
+        expect(response.body.images[0]).toEqual("mcrunchy-1682520325471.jpg")
     });
 
-    it('should return validator error', async () => {
+
+    it('should patch texts', async () => {
         const response = await request(app)
-            .put('/merchants/'+id_burger)
-            .auth(admin_token, { type: 'bearer' })
+            .patch('/merchants/photos/'+id_burger)
+            .auth(token_burger, { type: 'bearer' })
             .send({
-                "name": "BurgerKingUpdateado",
-                "CIF": "buger123456",
-                "address": "Gran via 57",
-                "email": "burger_granvia@comida.com",
-                "phone_num": "+34 975 456789",
-                "webpage_id": "121932293",
-                "user_id": "484832934"
+                "texts": ["burgers kings", "triple b burger buena barata"]    
             })
             .set('Accept', 'application/json')
-            .expect(403)
+            .expect(200)
+        expect(response.body.texts.pop()).toEqual("triple b burger buena barata")
     });
 
-    it('should get all the merchants', async () => {
+    it('should get all the webpages not ordered', async () => {
         const response = await request(app)
-            .get('/merchants/')
-            .auth(admin_token, { type: 'bearer' })
+            .get('/webpages?scoring=false')
             .expect(200) 
-        expect(response.body.pop().name).toEqual('BurgerKingUpdateado')     
+        expect(response.body.pop().title).toEqual('Burger')     
     })
 
-    it('should get a the merchant (BurgerKing)', async () => {
+    it('should get a the webpage (BurgerKing)', async () => {
         const response = await request(app)
-            .get('/merchants/'+id_burger)
-            .auth(admin_token, { type: 'bearer' })
+            .get('/webpages/'+webid_burger)
+            .auth(token_burger, { type: 'bearer' })
             .expect(200) 
-        expect(response.body.name).toEqual('BurgerKingUpdateado')     
+        expect(response.body.title).toEqual('Burger')     
+    })
+
+    it('should get all the webpages of city ciudadTest', async () => {
+        const response = await request(app)
+            .get('/webpages/search/ciudadTest')
+            .expect(200) 
+        expect(response.body.pop().title).toEqual('Burger')     
+    })
+
+    it('should get all the webpages of city ciudadTest and activity comida', async () => {
+        const response = await request(app)
+            .get('/webpages/search/ciudadTest/comida')
+            .expect(200) 
+        expect(response.body.pop().title).toEqual('Burger')     
+    })
+
+    it('should add review', async () => {
+        const response = await request(app)
+            .patch('/webpages/'+webid_burger)
+            .send({
+                "email": "sebastian@test.com",
+                "password": "sebastian123",
+                "score": 5,
+                "opinion": "La mejor hamburguesa de burger king de la vida"
+            })
+            .set('Accept', 'application/json')
+            .expect(200)
+        expect(response.body.reviews.scores).toEqual(5)
+    });
+
+    it('should delete a webpage', async () => {
+        const response = await request(app)
+            .delete('/webpage/'+webid_burger)
+            .auth(token_burger, { type: 'bearer' })
+            .set('Accept', 'application/json')
+            .expect(200)
+        expect(response.body.deleteWebpage.acknowledged).toEqual(true)
+        expect(response.body.updatedMerchant.webpage_id).toEqual(null)
+    })
+
+    it('should create a new webpage', async () => {
+        const response = await request(app)
+            .post('/webpages/')
+            .auth(token_burger, { type: 'bearer' })
+            .send({
+                "city": "madrid",
+                "activity": "comida",
+                "title": "Burger",
+                "summary": "Restaurante de Comida Rapida Burgerifica",
+                "texts": ["Prueba la nueva burger master"]    
+            })
+            .set('Accept', 'application/json')
+            .expect(205)
+        expect(response.body.createdWebPage.title).toEqual("Burger")
+        expect(response.body.updatedMerchant.webpage_id).toEqual(response.body.createdWebPage._id)
+        webid_burger = response.body.createdWebPage._id
     })
 
     it('should delete a merchant', async () => {
