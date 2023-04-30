@@ -60,9 +60,34 @@
 		.right {
 			width: 85%;
 			background-color: #FFF;
-			background-image: url("https://images.unsplash.com/photo-1505826759037-406b40feb5d6");
+			/* background-image: url("https://images.unsplash.com/photo-1505826759037-406b40feb5d6"); */
 			background-size: cover;
 			background-position: center;
+		}
+		.webpage_row{
+			width: 100%; 
+			overflow-x: auto;
+			margin-top: 50px;
+			max-height: 500px;
+			overflow-y: auto;
+			border: 2px solid black;
+		}
+		.images-texts{
+			display: flex;
+			width: 100%; 
+			overflow-x: auto;
+			
+		}
+		.info{
+			text-align: center;
+		}
+		.image_text_pair{
+			width: 200px;
+			margin-right: 10px;
+			margin-left: 10px;
+		}
+		.image_text_pair img, .image_text_pair a{
+			width: 200px;
 		}
 
 		
