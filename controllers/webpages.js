@@ -35,7 +35,10 @@ const MerchantcreateWebpage = async (req,res)=>{
         const merchant = (await merchantsModel.find({user_id: user._id}))[0];
         const webpageExists = (merchant.webpage_id != null);
         if(webpageExists){
-            res.status(205).send({message: 'Este comercio ya cuenta con una pagina web', webpage_id: merchant.webpage_id});
+            res.send({
+                message: 'Este comercio ya cuenta con una pagina web', 
+                webpage_id: merchant.webpage_id
+            });
             return;
         }
         const body = matchedData(req);

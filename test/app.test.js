@@ -255,7 +255,7 @@ describe('webpages', () => {
         id_burger = response.body.merchant._id
     })
 
-    it('should return an error cause of existing webpage', async () => {
+    it('should return message and webid cause of existing webpage', async () => {
         const response = await request(app)
             .post('/webpages/')
             .auth(token_burger, { type: 'bearer' })
@@ -268,13 +268,13 @@ describe('webpages', () => {
             
             })
             .set('Accept', 'application/json')
-            .expect(205)
+            .expect(200)
         expect(response.body.webpage_id).toEqual(webid_burger)
     })
 
     it('should update a webpage', async () => {
         const response = await request(app)
-            .post('/webpages/'+webid_burger)
+            .put('/webpages/'+webid_burger)
             .auth(token_burger, { type: 'bearer' })
             .send({
                 "city": "ciudadTest",
@@ -290,7 +290,7 @@ describe('webpages', () => {
 
     it('should get an not owner error', async () => {
         const response = await request(app)
-            .post('/webpages/'+webid_burger)
+            .put('/webpages/'+webid_burger)
             .auth(merchant_token, { type: 'bearer' })
             .send({
                 "city": "ciudadTest",
@@ -305,7 +305,7 @@ describe('webpages', () => {
 
     it('should patch images', async () => {
         const response = await request(app)
-            .patch('/merchants/photos/'+id_burger)
+            .patch('/webpages/photos/'+webid_burger)
             .auth(token_burger, { type: 'bearer' })
             .send({
                 "images": ["mcrunchy-1682520325471.jpg"," ", "bigmac-1682520163039.jpg"]    
@@ -318,7 +318,7 @@ describe('webpages', () => {
 
     it('should patch texts', async () => {
         const response = await request(app)
-            .patch('/merchants/photos/'+id_burger)
+            .patch('/webpages/texts/'+webid_burger)
             .auth(token_burger, { type: 'bearer' })
             .send({
                 "texts": ["burgers kings", "triple b burger buena barata"]    
@@ -347,6 +347,7 @@ describe('webpages', () => {
         const response = await request(app)
             .get('/webpages/search/ciudadTest')
             .expect(200) 
+
         expect(response.body.pop().title).toEqual('Burger')     
     })
 
@@ -354,6 +355,7 @@ describe('webpages', () => {
         const response = await request(app)
             .get('/webpages/search/ciudadTest/comida')
             .expect(200) 
+
         expect(response.body.pop().title).toEqual('Burger')     
     })
 
@@ -368,12 +370,12 @@ describe('webpages', () => {
             })
             .set('Accept', 'application/json')
             .expect(200)
-        expect(response.body.reviews.scores).toEqual(5)
+        expect(response.body.reviews.scores[0]).toEqual(5)
     });
 
     it('should delete a webpage', async () => {
         const response = await request(app)
-            .delete('/webpage/'+webid_burger)
+            .delete('/webpages/'+webid_burger)
             .auth(token_burger, { type: 'bearer' })
             .set('Accept', 'application/json')
             .expect(200)
@@ -393,7 +395,7 @@ describe('webpages', () => {
                 "texts": ["Prueba la nueva burger master"]    
             })
             .set('Accept', 'application/json')
-            .expect(205)
+            .expect(200)
         expect(response.body.createdWebPage.title).toEqual("Burger")
         expect(response.body.updatedMerchant.webpage_id).toEqual(response.body.createdWebPage._id)
         webid_burger = response.body.createdWebPage._id
