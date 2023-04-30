@@ -17,7 +17,7 @@
               <input type="text" id="jwt-token" name="jwt-token" required><br><br>
 
               <label for="webpage-id">Webpage ID:</label>
-              <input type="text" id="webpage-id" name="webpage-id" required><br><br>
+              <input type="text" id="webpage-id" name="webpage-id" placeholder="leave blank if creating webpage"><br><br>
               
               <label for="city">Ciudad:</label>
               <input type="text" id="city" name="city" required><br><br>
@@ -31,42 +31,43 @@
               <label for="summary">Resumen:</label>
               <textarea id="summary" name="summary" required></textarea><br><br>
               
-              <button type="submit" id="create-btn">Crear</button>
-              <button type="submit" id="update-btn">Actualizar</button>
-              <button type="submit" id="delete-btn">Borrar</button>
+              <button type="submit" id="create_btn">Crear</button>
+              <button type="submit" id="update_btn">Actualizar</button>
+              <button type="submit" id="delete_btn">Borrar</button>
             </form>
           </div>
           
           <div class="col" id="uploads">
             <!-- <h3>Upload Image</h3> -->
             <div style="margin-top: 50px">
-                <div class="upload-row">
+                <div class="upload-row" id="upload_row">
                     <div class="text-image-pair">
-                        <input type="text" id="image-url" name="image-url" placeholder="Texto"><br><br>
-                        <input type="file" id="image-upload" name="image-upload" accept="image/*"><br><br>
-                        <img id="image-preview" src="#" alt="Preview">
+                        <input type="text" id="text1" name="image-url" placeholder="Texto"><br><br>
+                        <form id="form_img_1"><input type="file" id="image_upload1" name="image-upload" accept="image/*"></form><br><br>
+                        <img id="image_preview1" src="#" alt="Preview">
                     </div>
                     <div class="text-image-pair">
-                        <input type="text" id="image-url" name="image-url" placeholder="Texto"><br><br>
-                        <input type="file" id="image-upload" name="image-upload" accept="image/*"><br><br>
-                        <img id="image-preview" src="#" alt="Preview">
+                        <input type="text" id="text2" name="image-url" placeholder="Texto"><br><br>
+                        <form id="form_img_2"><input type="file" id="image_upload1" name="image-upload" accept="image/*"></form><br><br>
+                        <img id="image_preview2" src="#" alt="Preview">
                     </div>
                 </div>
             </div>
-            <button id="upload-pair">Subir</button>
+            <button id="upload_pair">Subir</button>
           </div>
         </div>
         
         <div class="row" id="get-emails">
           <div class="col">
             <label for="city-users">Lista de emails de usuarios en: </label>
-            <input type="text" id="city-users" name="city-users" placeholder="ciudad" style="border: 2px solid black">
+            <input type="text" id="city_users" name="city-users" placeholder="ciudad" style="border: 2px solid black">
           </div>
           
           <div class="col">
-            <button type="submit" id="city-users-btn">Obtener lista</button>
+            <button type="submit" id="city_users_btn">Obtener lista</button>
           </div>
         </div>
+        <div id="email_list"></div>
       </div>
 </body>
 <script src="./merchant.js"></script>

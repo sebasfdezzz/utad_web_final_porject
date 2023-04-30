@@ -19,7 +19,7 @@ async function addMerchantId(id, merchant_id){
 
 const updateWebpage = async (req,res)=>{
     try{
-        const {id, ...body} = matchedData(req); //ver que regrese axactamente mathcedData y como cambia con distintos validators
+        const {id, ...body} = matchedData(req);
         await webpagesModel.findByIdAndUpdate(id, body); //no regresa la info updateada
         const newData = await webpagesModel.findById(id); //la nueva info
         res.send(newData);

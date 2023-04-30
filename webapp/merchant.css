@@ -104,9 +104,10 @@
   }
   
   #uploads img {
-    max-width: 100%;
+    max-width: 255px;
     height: auto;
-    margin-bottom: 20px;
+    max-height: 255px;
+    border: 2px dotted black;
   }
   
   /* Style the city users section */
@@ -118,7 +119,7 @@
     margin-bottom: 20px;
   }
   
-  #city-users-btn {
+  #city_users_btn {
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -139,7 +140,7 @@
     box-sizing: border-box;
     padding: 0 10px;
   }
-  #upload-pair{
+  #upload_pair{
     background-color: #4CAF50;
     color: white;
     border: none;
