@@ -48,7 +48,6 @@ const updateMerchant = async (req,res)=>{
 const getMerchants = async (req,res)=>{
     try{
         const data = await merchantsModel.find({});
-        console.log(data);
         res.send(data);
     }catch(err){
         console.log(err);
