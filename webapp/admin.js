@@ -48,7 +48,7 @@ update_btn.addEventListener('click', async() =>{
         body: JSON.stringify(payload)
     });
     if(!response) return;
-    alert(response.stringify());
+    alert('comercio actualizado');
 });
 
 delete_btn.addEventListener('click', async() =>{
