@@ -12,7 +12,7 @@ describe('merchants', () => {
 
     it('should register a merchant', async () => {
         const response = await request(app)
-            .post('/merchants/')
+            .post('/api/merchants/')
             .auth(admin_token, { type: 'bearer' })
             .send({
                 "name": "BurgerKing",
@@ -33,7 +33,7 @@ describe('merchants', () => {
 
     it('should get an unauthorized error', async () => {
         const response = await request(app)
-            .post('/merchants/')
+            .post('/api/merchants/')
             .auth(token_burger, { type: 'bearer' })
             .send({
                 "name": "BurgerKing",
@@ -48,7 +48,7 @@ describe('merchants', () => {
 
     it('should update a merchant', async () => {
         const response = await request(app)
-            .put('/merchants/'+id_burger)
+            .put('/api/merchants/'+id_burger)
             .auth(admin_token, { type: 'bearer' })
             .send({
                 "name": "BurgerKingUpdateado",
@@ -65,7 +65,7 @@ describe('merchants', () => {
 
     it('should return validator error', async () => {
         const response = await request(app)
-            .put('/merchants/'+id_burger)
+            .put('/api/merchants/'+id_burger)
             .auth(admin_token, { type: 'bearer' })
             .send({
                 "name": "BurgerKingUpdateado",
@@ -82,7 +82,7 @@ describe('merchants', () => {
 
     it('should get all the merchants', async () => {
         const response = await request(app)
-            .get('/merchants/')
+            .get('/api/merchants/')
             .auth(admin_token, { type: 'bearer' })
             .expect(200) 
         expect(response.body.pop().name).toEqual('BurgerKingUpdateado')     
@@ -90,7 +90,7 @@ describe('merchants', () => {
 
     it('should get a the merchant (BurgerKing)', async () => {
         const response = await request(app)
-            .get('/merchants/'+id_burger)
+            .get('/api/merchants/'+id_burger)
             .auth(admin_token, { type: 'bearer' })
             .expect(200) 
         expect(response.body.name).toEqual('BurgerKingUpdateado')     
@@ -98,7 +98,7 @@ describe('merchants', () => {
 
     it('should delete a merchant', async () => {
         const response = await request(app)
-            .delete('/merchants/'+id_burger)
+            .delete('/api/merchants/'+id_burger)
             .auth(admin_token, { type: 'bearer' })
             .set('Accept', 'application/json')
             .expect(200)
@@ -116,7 +116,7 @@ describe('storage', () => {
     it('should upload an image', async () => {
         const filepath = `${__dirname}/greenpr.jpg`; 
         const response = await request(app)
-            .post('/storage')
+            .post('/api/storage')
             .attach('image', filepath)
             .expect(200);
         expect(response.body.filename.split('-')[0]).toEqual('greenpr')
@@ -126,7 +126,7 @@ describe('storage', () => {
 
     it('should delete an image', async () => {
         const response = await request(app)
-            .delete('/storage/'+image_id)
+            .delete('/api/storage/'+image_id)
             .auth(admin_token, { type: 'bearer' })
             .set('Accept', 'application/json')
             .expect(200)
@@ -142,7 +142,7 @@ describe('users', () => {
 
     it('should register a user', async () => {
         const response = await request(app)
-            .post('/users')
+            .post('/api/users')
             .send({
                 "name": "usuario test",
                 "email": "test@test.com",
@@ -163,7 +163,7 @@ describe('users', () => {
 
     it('should get a validator error', async () => {
         const response = await request(app)
-            .post('/users/')
+            .post('/api/users/')
             .send({
                 "name": "usuario test2",
                 "email": "test2@test.com",
@@ -180,7 +180,7 @@ describe('users', () => {
 
     it('should update a user', async () => {
         const response = await request(app)
-            .put('/users/')
+            .put('/api/users/')
             .send({
                 "name": "usuario test updateado",
                 "email": "test@test.com",
@@ -198,7 +198,7 @@ describe('users', () => {
 
     it('should get all the users from a city', async () => {
         const response = await request(app)
-            .get('/users/ciudadTest')
+            .get('/api/users/ciudadTest')
             .auth(merchant_token, { type: 'bearer' })
             .expect(200) 
         expect(response.body.pop()).toEqual('test@test.com')     
@@ -206,7 +206,7 @@ describe('users', () => {
 
     it('should get login error', async () => {
         const response = await request(app)
-            .delete('/users/')
+            .delete('/api/users/')
             .send({
                 "email": "test@test.com",
                 "password": "test1234",
@@ -217,7 +217,7 @@ describe('users', () => {
 
     it('should delete a user', async () => {
         const response = await request(app)
-            .delete('/users/')
+            .delete('/api/users/')
             .send({
                 "email": "test@test.com",
                 "password": "testuser123",
@@ -236,7 +236,7 @@ describe('webpages', () => {
 
     it('should register a merchant', async () => {
         const response = await request(app)
-            .post('/merchants/')
+            .post('/api/merchants/')
             .auth(admin_token, { type: 'bearer' })
             .send({
                 "name": "BurgerKing",
@@ -257,7 +257,7 @@ describe('webpages', () => {
 
     it('should return message and webid cause of existing webpage', async () => {
         const response = await request(app)
-            .post('/webpages/')
+            .post('/api/webpages/')
             .auth(token_burger, { type: 'bearer' })
             .send({
                 "city": "madrid",
@@ -274,7 +274,7 @@ describe('webpages', () => {
 
     it('should update a webpage', async () => {
         const response = await request(app)
-            .put('/webpages/'+webid_burger)
+            .put('/api/webpages/'+webid_burger)
             .auth(token_burger, { type: 'bearer' })
             .send({
                 "city": "ciudadTest",
@@ -290,7 +290,7 @@ describe('webpages', () => {
 
     it('should get an not owner error', async () => {
         const response = await request(app)
-            .put('/webpages/'+webid_burger)
+            .put('/api/webpages/'+webid_burger)
             .auth(merchant_token, { type: 'bearer' })
             .send({
                 "city": "ciudadTest",
@@ -305,7 +305,7 @@ describe('webpages', () => {
 
     it('should patch images', async () => {
         const response = await request(app)
-            .patch('/webpages/photos/'+webid_burger)
+            .patch('/api/webpages/photos/'+webid_burger)
             .auth(token_burger, { type: 'bearer' })
             .send({
                 "images": ["mcrunchy-1682520325471.jpg"," ", "bigmac-1682520163039.jpg"]    
@@ -318,7 +318,7 @@ describe('webpages', () => {
 
     it('should patch texts', async () => {
         const response = await request(app)
-            .patch('/webpages/texts/'+webid_burger)
+            .patch('/api/webpages/texts/'+webid_burger)
             .auth(token_burger, { type: 'bearer' })
             .send({
                 "texts": ["burgers kings", "triple b burger buena barata"]    
@@ -330,14 +330,14 @@ describe('webpages', () => {
 
     it('should get all the webpages not ordered', async () => {
         const response = await request(app)
-            .get('/webpages?scoring=false')
+            .get('/api/webpages?scoring=false')
             .expect(200) 
         expect(response.body.pop().title).toEqual('Burger')     
     })
 
     it('should get a the webpage (BurgerKing)', async () => {
         const response = await request(app)
-            .get('/webpages/'+webid_burger)
+            .get('/api/webpages/'+webid_burger)
             .auth(token_burger, { type: 'bearer' })
             .expect(200) 
         expect(response.body.title).toEqual('Burger')     
@@ -345,7 +345,7 @@ describe('webpages', () => {
 
     it('should get all the webpages of city ciudadTest', async () => {
         const response = await request(app)
-            .get('/webpages/search/ciudadTest')
+            .get('/api/webpages/search/ciudadTest')
             .expect(200) 
 
         expect(response.body.pop().title).toEqual('Burger')     
@@ -353,7 +353,7 @@ describe('webpages', () => {
 
     it('should get all the webpages of city ciudadTest and activity comida', async () => {
         const response = await request(app)
-            .get('/webpages/search/ciudadTest/comida')
+            .get('/api/webpages/search/ciudadTest/comida')
             .expect(200) 
 
         expect(response.body.pop().title).toEqual('Burger')     
@@ -361,7 +361,7 @@ describe('webpages', () => {
 
     it('should add review', async () => {
         const response = await request(app)
-            .patch('/webpages/'+webid_burger)
+            .patch('/api/webpages/'+webid_burger)
             .send({
                 "email": "sebastian@test.com",
                 "password": "sebastian123",
@@ -375,7 +375,7 @@ describe('webpages', () => {
 
     it('should delete a webpage', async () => {
         const response = await request(app)
-            .delete('/webpages/'+webid_burger)
+            .delete('/api/webpages/'+webid_burger)
             .auth(token_burger, { type: 'bearer' })
             .set('Accept', 'application/json')
             .expect(200)
@@ -385,7 +385,7 @@ describe('webpages', () => {
 
     it('should create a new webpage', async () => {
         const response = await request(app)
-            .post('/webpages/')
+            .post('/api/webpages/')
             .auth(token_burger, { type: 'bearer' })
             .send({
                 "city": "madrid",
@@ -403,7 +403,7 @@ describe('webpages', () => {
 
     it('should delete a merchant', async () => {
         const response = await request(app)
-            .delete('/merchants/'+id_burger)
+            .delete('/api/merchants/'+id_burger)
             .auth(admin_token, { type: 'bearer' })
             .set('Accept', 'application/json')
             .expect(200)

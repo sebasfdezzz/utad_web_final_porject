@@ -9,6 +9,7 @@ const dbConnect = () => {
     }, (err, res) => {
         if(!err) {
             console.log("Conectado a la BD")
+            console.log("\nAccess at: http://localhost:"+ process.env.PORT);
         }else {
             console.log("No se ha podido establecer la conexión a la BD")
         }

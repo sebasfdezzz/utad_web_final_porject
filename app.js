@@ -27,11 +27,16 @@ morganBody(app, {
 })
 
 app.use(express.static("storage")); //dorectorio publico
+app.use(express.static('webapp'));
 
-app.use("/users", userRouter);
-app.use("/merchants", merchantsRouter);
-app.use("/webpages", webpagesRouter);
-app.use('/storage',storageRouter);
+app.get('/', function(req, res) {
+    res.redirect('/webapp/index.html');
+  });
+
+app.use("/api/users", userRouter);
+app.use("/api/merchants", merchantsRouter);
+app.use("/api/webpages", webpagesRouter);
+app.use('/api/storage',storageRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
