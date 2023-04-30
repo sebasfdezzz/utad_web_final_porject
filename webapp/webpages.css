@@ -67,27 +67,31 @@
 		.webpage_row{
 			width: 100%; 
 			overflow-x: auto;
+			border-radius: 10px;
 			margin-top: 50px;
 			max-height: 500px;
 			overflow-y: auto;
 			border: 2px solid black;
+
 		}
 		.images-texts{
 			display: flex;
 			width: 100%; 
 			overflow-x: auto;
-			
 		}
 		.info{
 			text-align: center;
 		}
 		.image_text_pair{
 			width: 200px;
-			margin-right: 10px;
-			margin-left: 10px;
+			margin-right: 15px;
+			margin-left: 15px;
 		}
 		.image_text_pair img, .image_text_pair a{
 			width: 200px;
+		}
+		.reviews-container{
+			margin-left: 30px;
 		}
 
 		
