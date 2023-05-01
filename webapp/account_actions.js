@@ -109,7 +109,12 @@ async function getJSON(url,options) {
       alert(response.status + ': ' + (await response.text()));
       return;
   }
-  return await response.json();
+  try{
+      return await response.json();
+  }catch(err){
+      console.log(err);
+      alert('RESPONSE_ERROR');
+  }
 }
 
 function getReviewPayload() {

@@ -38,7 +38,7 @@ update_btn.addEventListener('click', async() =>{
     const payload = getPayload();
     const token = token_input.value.trim();
     let merchant_id = merchantId_input.value.trim();
-    merchant_id = merchant_id.lenght ?  merchant_id : 'senslessid' ;
+    merchant_id = merchant_id.length ?  merchant_id : 'senslessid' ;
 
     let response = await getJSON(url+merchant_id, {
         method: 'PUT',
@@ -55,7 +55,7 @@ update_btn.addEventListener('click', async() =>{
 delete_btn.addEventListener('click', async() =>{
     let merchant_id = merchantId_input.value.trim();
     const token = token_input.value.trim();
-    merchant_id = merchant_id.lenght ?  merchant_id : 'senslessid' ;
+    merchant_id = merchant_id.length ?  merchant_id : 'senslessid' ;
 
     let response = await getJSON(url+merchant_id, {
         method: 'DELETE',
@@ -71,7 +71,7 @@ delete_btn.addEventListener('click', async() =>{
 get1_btn.addEventListener('click', async() =>{
     let merchant_id = merchantId_input.value.trim();
     const token = token_input.value.trim();
-    merchant_id = merchant_id.lenght ?  merchant_id : 'senslessid' ;
+    merchant_id = merchant_id.length ?  merchant_id : 'senslessid' ;
     let response = await getJSON(url+merchant_id, {
         method: 'GET',
         headers: {
@@ -164,5 +164,4 @@ async function getJSON(url,options) {
         console.log(err);
         alert('RESPONSE_ERROR');
     }
-
 }
