@@ -39,10 +39,11 @@ upload_pair.addEventListener('click',async ()=>{
     const webpageId = document.getElementById("webpage-id").value.trim();
     let url = "http://localhost:3000/api/webpages/";
     //text part
-    let response = await getJSON(url + 'texts/'+webpageId,{
+    let response = await getJSON(url + 'texts/'+((webpageId.trim().length == 0) ? '34': webpageId),{
         method: 'PATCH',
         headers: {
-            'Authorization': `Bearer ${token}`
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${jwtToken}`
         },
         body: JSON.stringify({
             texts: [text1.value, text2.value]
@@ -50,25 +51,35 @@ upload_pair.addEventListener('click',async ()=>{
     });
     if(!response) return;
     
-    let responseImage1 = image_upload1.files[0] ? (await getJSON('http://localhost:3000/api/storage ',{
-        method: 'POST',
-        body: new FormData(document.getElementById('form_img_1'))
+
+    // Upload image 1
+    const formData = new FormData();
+    formData.append('image',image_upload1.files[0]);
+  
+    let responseImage1 = image_upload1.files[0] ? (await getJSON('http://localhost:3000/api/storage', {
+      method: 'POST',
+      body: formData
     })).url : " ";
     if(!responseImage1) return;
 
-    let responseImage2 = image_upload2.files[0] ? (await getJSON('http://localhost:3000/api/storage ',{
-        method: 'POST',
-        body: new FormData(document.getElementById('form_img_2'))
+    // Upload image 2
+    const formData2 = new FormData();
+    formData2.append('image',image_upload2.files[0]);
+  
+    let responseImage2 = image_upload2.files[0] ? (await getJSON('http://localhost:3000/api/storage', {
+      method: 'POST',
+      body: formData2
     })).url : " ";
     if(!responseImage2) return;
 
     response = await getJSON(url + 'photos/'+webpageId,{
         method: 'PATCH',
         headers: {
-            'Authorization': `Bearer ${token}`
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${jwtToken}`
         },
         body: JSON.stringify({
-            texts: [responseImage1, responseImage2]
+            images: [responseImage1, responseImage2]
         })
     });
     if(!response) return;
@@ -79,7 +90,7 @@ city_users_btn.addEventListener('click',async ()=>{
     let url = 'http://localhost:3000/api/users/'+city_users_input.value.trim();
     let response = await getJSON(url,{
         headers:{
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${document.getElementById("jwt-token").value.trim()}`
         }
     });
     if(!response) return;
@@ -94,34 +105,32 @@ const createButton = document.getElementById("create_btn");
 const updateButton = document.getElementById("update_btn");
 const deleteButton = document.getElementById("delete_btn");
 
-// Event listener for form submit
-form.addEventListener("submit", async (event) => {
-  event.preventDefault(); // prevent default form submission
-  
-  const jwtToken = jwtTokenInput.value.trim();
-  const webpageId = document.getElementById("webpage-id").value.trim();
-  const city = document.getElementById("city").value.trim();
-  const activity = document.getElementById("activity").value.trim();
-  const title = document.getElementById("title").value.trim();
-  const summary = document.getElementById("summary").value.trim();
-  
-  // Define the request headers
-  const headers = {
-    "Content-Type": "application/json",
-    "Authorization": `Bearer ${jwtToken}`
-  };
-  
-  // Define the request body
-  const body = JSON.stringify({city, activity, title, summary });
-  
-  // Determine which button was clicked and set the appropriate request method and endpoint URL
-  let response, method, url="http://localhost:3000/api/webpages/";
-  if (event.target === createButton) {
+createButton.addEventListener('click',async (event)=>{
+    event.preventDefault(); // prevent default form submission
+    const jwtToken = jwtTokenInput.value.trim();
+    const webpageId = document.getElementById("webpage-id");
+    const city = document.getElementById("city").value.trim();
+    const activity = document.getElementById("activity").value.trim();
+    const title = document.getElementById("title").value.trim();
+    const summary = document.getElementById("summary").value.trim();
+    
+    // Define the request headers
+    const headers = {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${jwtToken}`
+    };
+    
+    // Define the request body
+    const body = JSON.stringify({city, activity, title, summary });
+    
+    // Determine which button was clicked and set the appropriate request method and endpoint URL
+    let response, method, url="http://localhost:3000/api/webpages/";
+    console.log('create button entered');
     method = "POST";
     response = await getJSON(url, {method, headers,body});
     if (!response)
         return;
-    if (!response.message){
+    if (response.message){
         webpageId.value = response.webpage_id;
         alert('Este comercio ya tiene una pagina web con id: '+ response.webpage_id);
     }
@@ -129,22 +138,61 @@ form.addEventListener("submit", async (event) => {
         webpageId.value = response.webpage_id;
         alert('Pagina web creada con id: '+response.webpage_id);
     }
-  } else if (event.target === updateButton) {
+});
+
+updateButton.addEventListener('click',async (event)=>{
+    event.preventDefault(); // prevent default form submission
+    const jwtToken = jwtTokenInput.value.trim();
+    const webpageId = document.getElementById("webpage-id").value.trim();
+    const city = document.getElementById("city").value.trim();
+    const activity = document.getElementById("activity").value.trim();
+    const title = document.getElementById("title").value.trim();
+    const summary = document.getElementById("summary").value.trim();
+    
+    // Define the request headers
+    const headers = {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${jwtToken}`
+    };
+    
+    // Define the request body
+    const body = JSON.stringify({city, activity, title, summary });
+    
+    // Determine which button was clicked and set the appropriate request method and endpoint URL
+    let response, method, url="http://localhost:3000/api/webpages/";
     method = "PUT";
     url += webpageId;
     response = await getJSON(url, {method, headers,body});
     if (!response) return;
     alert('Pagina actualizada');
-  } else if (event.target === deleteButton) {
+});
+
+deleteButton.addEventListener('click',async (event)=>{
+    event.preventDefault(); // prevent default form submission
+    const jwtToken = jwtTokenInput.value.trim();
+    const webpageId = document.getElementById("webpage-id").value.trim();
+    const city = document.getElementById("city").value.trim();
+    const activity = document.getElementById("activity").value.trim();
+    const title = document.getElementById("title").value.trim();
+    const summary = document.getElementById("summary").value.trim();
+    
+    // Define the request headers
+    const headers = {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${jwtToken}`
+    };
+    
+    // Define the request body
+    const body = JSON.stringify({city, activity, title, summary });
+    
+    // Determine which button was clicked and set the appropriate request method and endpoint URL
+    let response, method, url="http://localhost:3000/api/webpages/";
     method = "DELETE";
     url += webpageId;  
     response = await getJSON(url, {method, headers,body});
     if (!response) return;
     alert('Pagina borrada');
-    }
 });
-
-
 
 async function getJSON(url,options) {
     let response = await fetch(url,options);

@@ -7,7 +7,7 @@ const storage = multer.diskStorage({
     filename:function(req, file, callback){ //Sobreescribimos o renombramos
         //Tienen extensión jpg, pdf, mp4
         const ext = file.originalname.split(".").pop() //el último valor
-        const filename = file.originalname.split(".")[0]+'-'+Date.now()+"."+ext
+        const filename = file.originalname.split(".")[0].replace(/\s/g, '')+'-'+Date.now()+"."+ext
         callback(null, filename)
     }
 })

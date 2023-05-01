@@ -127,7 +127,7 @@ router.patch('/photos/:id',authMiddleware, checkRol(['merchant']),validatorId , 
  *      security:
  *          - bearerAuth: []
  */
-router.patch('/texts/:id',authMiddleware, checkRol(['merchant']),validatorId , checkWebpageOwnership,validatorAddText, uploadText); //para agregar fotos a una pagina (accesible por merchants)
+router.patch('/texts/:id',authMiddleware, checkRol(['merchant']),validatorId, checkWebpageOwnership,validatorAddText, uploadText); //para agregar fotos a una pagina (accesible por merchants)
 
 /**
  * @openapi

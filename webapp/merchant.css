@@ -79,7 +79,7 @@
     margin-top: 0;
   }
   
-  #uploads input[type="text"]{
+  #uploads input[type="text"], #uploads textarea{
     width: 100%;
     padding: 10px;
     border: none;
