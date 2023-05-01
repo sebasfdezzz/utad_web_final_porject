@@ -148,7 +148,7 @@ describe('users', () => {
                 "email": "test@test.com",
                 "password": "testuser123",
                 "age": 22,
-                "city": "ciudadTest",
+                "city": "ciudadtest",
                 "interests": ["interes1", "interes2"],
                 "acceptRecievingOffers": false
             })
@@ -169,7 +169,7 @@ describe('users', () => {
                 "email": "test2@test.com",
                 "password": "testuser123",
                 "age": 1,
-                "city": "ciudadTest",
+                "city": "ciudadtest",
                 "interests": ["interes1", "interes2"],
                 "acceptRecievingOffers": true,
                 "role": "admin"
@@ -186,7 +186,7 @@ describe('users', () => {
                 "email": "test@test.com",
                 "password": "testuser123",
                 "age": 1,
-                "city": "ciudadTest",
+                "city": "ciudadtest",
                 "interests": ["interes1", "interes2"],
                 "acceptRecievingOffers": true
             })
@@ -277,7 +277,7 @@ describe('webpages', () => {
             .put('/api/webpages/'+webid_burger)
             .auth(token_burger, { type: 'bearer' })
             .send({
-                "city": "ciudadTest",
+                "city": "ciudadtest",
                 "activity": "comida",
                 "title": "Burger",
                 "summary": "Restaurante de Comida Rapida Burgerifica",
@@ -293,7 +293,7 @@ describe('webpages', () => {
             .put('/api/webpages/'+webid_burger)
             .auth(merchant_token, { type: 'bearer' })
             .send({
-                "city": "ciudadTest",
+                "city": "ciudadtest",
                 "activity": "comida",
                 "title": "Burger",
                 "summary": "Restaurante de Comida Rapida Burgerifica",

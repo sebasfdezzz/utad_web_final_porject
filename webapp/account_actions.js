@@ -92,8 +92,8 @@ function getPayload(forDelete=false){
     const email = email_input.value.trim();
     const password = password_input.value.trim();
     const age = age_input.value.trim();
-    const city = city_input.value.trim();
-    const interests = interests_input.value.trim().split(',').map((interest) => interest.trim());
+    const city = city_input.value.trim().toLowerCase();
+    const interests = interests_input.value.trim().split(',').map((interest) => interest.trim().toLowerCase());
     const acceptRecievingOffers = offers_input.checked;
 
     if (forDelete) {

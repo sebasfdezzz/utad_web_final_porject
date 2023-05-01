@@ -139,7 +139,7 @@ const getWebpage = async (req,res)=>{
 const getByCity = async (req,res)=>{
     try{
         const {city} = matchedData(req);
-        const data = await webpagesModel.find({city: city});
+        const data = await webpagesModel.find({city: city.toLowerCase()});
         res.send(data);
     }catch(err){
         console.log(res);
@@ -150,7 +150,7 @@ const getByCity = async (req,res)=>{
 const getByCityAndActivity = async (req,res)=>{
     try{
         const {city, activity} = matchedData(req);
-        const data = await webpagesModel.find({city: city, activity: activity});
+        const data = await webpagesModel.find({city: city.toLowerCase(), activity: activity.toLowerCase()});
         res.send(data);
     }catch(err){
         console.log(res);

@@ -42,6 +42,8 @@ image_upload2.addEventListener("change", () => {
 upload_pair.addEventListener('click',async ()=>{
     const jwtToken = jwtTokenInput.value.trim();
     const webpageId = document.getElementById("webpage-id").value.trim();
+    webpageId = webpageId.length ? webpageId : 'senslessid';
+    
     let url = "http://localhost:3000/api/webpages/";
     //text part
     let response = await getJSON(url + 'texts/'+((webpageId.trim().length == 0) ? '34': webpageId),{
@@ -108,8 +110,8 @@ createButton.addEventListener('click',async (event)=>{
     event.preventDefault(); // prevent default form submission
     const jwtToken = jwtTokenInput.value.trim();
     const webpageId = document.getElementById("webpage-id");
-    const city = document.getElementById("city").value.trim();
-    const activity = document.getElementById("activity").value.trim();
+    const city = document.getElementById("city").value.trim().toLowerCase();
+    const activity = document.getElementById("activity").value.trim().toLowerCase();
     const title = document.getElementById("title").value.trim();
     const summary = document.getElementById("summary").value.trim();
     
@@ -143,11 +145,12 @@ updateButton.addEventListener('click',async (event)=>{
     event.preventDefault(); // prevent default form submission
     const jwtToken = jwtTokenInput.value.trim();
     const webpageId = document.getElementById("webpage-id").value.trim();
-    const city = document.getElementById("city").value.trim();
-    const activity = document.getElementById("activity").value.trim();
+    const city = document.getElementById("city").value.trim().toLowerCase();
+    const activity = document.getElementById("activity").value.trim().toLowerCase();
     const title = document.getElementById("title").value.trim();
     const summary = document.getElementById("summary").value.trim();
-    
+    webpageId = webpageId.length ? webpageId : 'senslessid';
+
     // Define the request headers
     const headers = {
       "Content-Type": "application/json",
@@ -170,25 +173,19 @@ deleteButton.addEventListener('click',async (event)=>{
     event.preventDefault(); // prevent default form submission
     const jwtToken = jwtTokenInput.value.trim();
     const webpageId = document.getElementById("webpage-id").value.trim();
-    const city = document.getElementById("city").value.trim();
-    const activity = document.getElementById("activity").value.trim();
-    const title = document.getElementById("title").value.trim();
-    const summary = document.getElementById("summary").value.trim();
-    
+    webpageId = webpageId.length ? webpageId : 'senslessid';
+
     // Define the request headers
     const headers = {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${jwtToken}`
     };
     
-    // Define the request body
-    const body = JSON.stringify({city, activity, title, summary });
-    
     // Determine which button was clicked and set the appropriate request method and endpoint URL
     let response, method, url="http://localhost:3000/api/webpages/";
     method = "DELETE";
     url += webpageId;  
-    response = await getJSON(url, {method, headers,body});
+    response = await getJSON(url, {method, headers});
     if (!response) return;
     alert('Pagina borrada');
 });
