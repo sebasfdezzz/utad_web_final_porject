@@ -7,6 +7,11 @@ const text1 = document.getElementById('text1');
 const image_upload1 = document.getElementById('image_upload1');
 const text2 = document.getElementById('text2');
 const image_upload2 = document.getElementById('image_upload2');
+const form = document.getElementById("comercio-form");
+const jwtTokenInput = document.getElementById("jwt-token");
+const createButton = document.getElementById("create_btn");
+const updateButton = document.getElementById("update_btn");
+const deleteButton = document.getElementById("delete_btn");
 
 image_upload1.addEventListener("change", () => {
     const file = image_upload1.files[0];
@@ -98,12 +103,6 @@ city_users_btn.addEventListener('click',async ()=>{
         document.getElementById('email_list').innerHTML += `<p>${response[i]}</p><br></br>`
     }
 });
-
-const form = document.getElementById("comercio-form");
-const jwtTokenInput = document.getElementById("jwt-token");
-const createButton = document.getElementById("create_btn");
-const updateButton = document.getElementById("update_btn");
-const deleteButton = document.getElementById("delete_btn");
 
 createButton.addEventListener('click',async (event)=>{
     event.preventDefault(); // prevent default form submission

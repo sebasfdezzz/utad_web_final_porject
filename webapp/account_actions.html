@@ -10,54 +10,54 @@
 </head>
 <body>
     <div id="user-info">
-        <h1>User Registration Form</h1>
-        <form>
-            <label for="name">Name:</label>
+        <h1>Registro de usuario</h1>
+        <form id="register_form">
+            <label for="name">Nombre:</label>
             <input type="text" id="name" name="name" required><br>
     
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required><br>
     
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required placeholder="Entre 8 y 16 caracteres"><br>
     
-            <label for="age">Age:</label>
+            <label for="age">Edad:</label>
             <input type="number" id="age" name="age" required><br>
     
-            <label for="city">City:</label>
+            <label for="city">Ciudad:</label>
             <input type="text" id="city" name="city" required><br>
     
-            <label for="interests">Interests:</label>
-            <textarea id="interests" name="interests" rows="5" cols="30" required></textarea><br>
+            <label for="interests">Intereses:</label>
+            <input type="text" id="interests" name="interests" required placeholder="separados por , ej: comida,ocio"><br>
     
             <label for="offers">Aceptar recibir ofertas:</label>
-            <input type="checkbox" id="offers" name="offers" class="switch" checked><br>
+            <input type="checkbox" id="offers" name="offers" class="switch" checked style="margin:0;"><br>
     
-            <button type="submit" id="register">Registrar</button>
-            <button type="submit" id="update">Actualizar informacion</button>
-            <button type="submit" id="delete">Borrar cuenta</button>
+            <button type="submit" id="register_btn">Registrar</button>
+            <button type="submit" id="update_btn">Actualizar informacion</button>
+            <button type="submit" id="delete_btn">Borrar cuenta</button>
         </form>
     </div>
 
     <div id="review">
-        <h1>Webpage Review Form</h1>
-        <form>
+        <h1>Dejar una reseña</h1>
+        <form id="review_form">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br>
+            <input type="email" id="email_rev" name="email" required><br>
     
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password_rev" name="password" required><br>
 
             <label for="webpage-id">Webpage ID:</label>
-            <input type="text" id="webpage-id" name="webpage-id" required><br>
+            <input type="text" id="webpage_id" name="webpage-id" required><br>
     
-            <label for="score" id="score-label">Score:</label>
+            <label for="score" id="score-label">Score: 0★</label>
             <input type="range" id="score" name="score" min="0" max="5" value="0" step="0.1" required oninput="updateValue(this.value)">
     
-            <label for="review">Review:</label>
+            <label for="review">Reseña:</label>
             <textarea id="review_text" name="review" rows="5" cols="30" required></textarea><br>
     
-            <button type="submit" id="send-review">Send Review</button>
+            <button type="submit" id="send_review_btn">Mandar reseña</button>
         </form>
     </div>
 	
