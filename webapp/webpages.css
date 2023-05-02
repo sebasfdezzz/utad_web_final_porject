@@ -3,7 +3,6 @@
 			margin: 0;
 			padding: 0;
 			font-family: Arial, sans-serif;
-			background-color: #F5F5F5;
 		}
 		.container {
 			display: flex;
@@ -16,6 +15,8 @@
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
+			background-color: #F5F5F5;
+    		min-width: fit-content;
 		}
 		h1 {
 			font-size: 2rem;
@@ -63,6 +64,7 @@
 			/* background-image: url("https://images.unsplash.com/photo-1505826759037-406b40feb5d6"); */
 			background-size: cover;
 			background-position: center;
+			overflow-y: auto;
 		}
 		.webpage_row{
 			width: 100%; 
@@ -87,11 +89,17 @@
 			margin-right: 15px;
 			margin-left: 15px;
 		}
-		.image_text_pair img, .image_text_pair a{
+		.image_text_pair img{
+			width: 200px;
+			height: 200px;
+			object-fit: contain;
+		}
+		.image_text_pair a{
 			width: 200px;
 		}
 		.reviews-container{
 			margin-left: 30px;
 		}
+	
 
 		
