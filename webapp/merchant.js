@@ -45,20 +45,42 @@ upload_pair.addEventListener('click',async ()=>{
     webpageId = webpageId.length ? webpageId : 'senslessid';
     
     let url = "http://localhost:3000/api/webpages/";
+
+    let savePair1 = text1.value || image_upload1.files[0];
+    let savePair2 = text2.value || image_upload2.files[0];
+
+    if (!savePair1 && !savePair2){
+        alert('No hay nada que subir');
+        return;
+    }
+
+    if(savePair2 && !savePair1){
+        alert('No puede dejar ambos de los primeros texto e imagen vacios');
+        return;
+    }
+
+    let texts2save = () =>{
+        let temp=[];
+        if(savePair1) temp.push(text1.value ? text1.value : ' ');
+        if(savePair2) temp.push(text2.value ? text2.value : ' ');
+        return temp;
+    } 
+
+
+
     //text part
-    let response = await getJSON(url + 'texts/'+((webpageId.trim().length == 0) ? '34': webpageId),{
+    let response = await getJSON(url + 'texts/'+((webpageId.trim().length == 0) ? 'senslessId': webpageId),{
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${jwtToken}`
         },
         body: JSON.stringify({
-            texts: [text1.value, text2.value]
+            texts: texts2save()
         })
     });
     if(!response) return;
     
-
     // Upload image 1
     const formData = new FormData();
     formData.append('image',image_upload1.files[0]);
@@ -69,15 +91,25 @@ upload_pair.addEventListener('click',async ()=>{
     })).url : " ";
     if(!responseImage1) return;
 
-    // Upload image 2
-    const formData2 = new FormData();
-    formData2.append('image',image_upload2.files[0]);
-  
-    let responseImage2 = image_upload2.files[0] ? (await getJSON('http://localhost:3000/api/storage', {
-      method: 'POST',
-      body: formData2
-    })).url : " ";
-    if(!responseImage2) return;
+    let responseImage2;
+    if(savePair2){
+        // Upload image 2
+        const formData2 = new FormData();
+        formData2.append('image',image_upload2.files[0]);
+    
+        responseImage2 = image_upload2.files[0] ? (await getJSON('http://localhost:3000/api/storage', {
+        method: 'POST',
+        body: formData2
+        })).url : " ";
+        if(!responseImage2) return;
+    }
+
+    let imgs2save = () =>{
+        let temp=[];
+        if(savePair1) temp.push(responseImage1);
+        if(savePair2) temp.push(responseImage2);
+        return temp;
+    } 
 
     response = await getJSON(url + 'photos/'+webpageId,{
         method: 'PATCH',
@@ -86,7 +118,7 @@ upload_pair.addEventListener('click',async ()=>{
             'Authorization': `Bearer ${jwtToken}`
         },
         body: JSON.stringify({
-            images: [responseImage1, responseImage2]
+            images: imgs2save()
         })
     });
     if(!response) return;
@@ -94,7 +126,9 @@ upload_pair.addEventListener('click',async ()=>{
 });
 
 city_users_btn.addEventListener('click',async ()=>{
-    let url = 'http://localhost:3000/api/users/'+city_users_input.value.trim();
+    let city = city_users_input.value.trim();
+    city = city.length ? city : 'sensless_city';
+    let url = 'http://localhost:3000/api/users/'+city;
     let response = await getJSON(url,{
         headers:{
             'Authorization': `Bearer ${document.getElementById("jwt-token").value.trim()}`
