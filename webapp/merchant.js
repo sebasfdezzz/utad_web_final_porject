@@ -54,19 +54,12 @@ upload_pair.addEventListener('click',async ()=>{
         return;
     }
 
-    if(savePair2 && !savePair1){
-        alert('No puede dejar ambos de los primeros texto e imagen vacios');
-        return;
-    }
-
     let texts2save = () =>{
         let temp=[];
         if(savePair1) temp.push(text1.value ? text1.value : ' ');
         if(savePair2) temp.push(text2.value ? text2.value : ' ');
         return temp;
     } 
-
-
 
     //text part
     let response = await getJSON(url + 'texts/'+((webpageId.trim().length == 0) ? 'senslessId': webpageId),{
@@ -80,16 +73,20 @@ upload_pair.addEventListener('click',async ()=>{
         })
     });
     if(!response) return;
+
+    let responseImage1;
+    if(savePair1){
+        // Upload image 1
+        const formData = new FormData();
+        formData.append('image',image_upload1.files[0]);
     
-    // Upload image 1
-    const formData = new FormData();
-    formData.append('image',image_upload1.files[0]);
-  
-    let responseImage1 = image_upload1.files[0] ? (await getJSON('http://localhost:3000/api/storage', {
-      method: 'POST',
-      body: formData
-    })).url : " ";
-    if(!responseImage1) return;
+        responseImage1 = image_upload1.files[0] ? (await getJSON('http://localhost:3000/api/storage', {
+        method: 'POST',
+        body: formData
+        })).url : " ";
+        if(!responseImage1) return;
+    }
+    
 
     let responseImage2;
     if(savePair2){
