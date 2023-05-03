@@ -53,7 +53,6 @@ const loginRequired = async (req, res, next) => { //necesita que la peticion se 
 
         const token = await tokenSign(user);
         req.headers.authorization = 'Bearer ' + token;
-        //console.log('login session validated');
         next();
     }catch(err){
         console.log(err);

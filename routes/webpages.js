@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {createWebpage, updateWebpage,uploadImage,uploadText,deleteWebpage,getWebpages,getWebpage, getByCity, getByCityAndActivity, addReview, MerchantcreateWebpage} = require('../controllers/webpages');
-const {validatorGetByCity, validatorGetByCityAndActivity, validatorId,validatorAddText,validatorAddImages, validatorCreate, validatorReview, validatorCreateUpdate} = require('../validators/webpages');
+const {validatorGetByCity, validatorGetByCityAndActivity, validatorId,validatorAddText,validatorAddImages, validatorReview, validatorCreateUpdate} = require('../validators/webpages');
 const {authMiddleware, checkRol, checkWebpageOwnership , loginRequired} = require('../middleware/auth');
 const {validatorLogin} = require('../validators/users');
 

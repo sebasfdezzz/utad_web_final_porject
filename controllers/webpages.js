@@ -4,17 +4,30 @@ const merchantsModel = require('../models/merchants');
 const { handleHttpError } = require('../utils/handleError');
 
 async function createWebpage(){
-    const dataWebpage = await webpagesModel.create({});
-    const webpage_id = dataWebpage._id;
-    return webpage_id;
+    try{
+        const dataWebpage = await webpagesModel.create({});
+        const webpage_id = dataWebpage._id;
+        return webpage_id;
+    }catch(err){
+        console.log(res);
+        handleHttpError(res, 'ERROR_CREATING_WEBPAGE_FROM_ADMIN');
+        return;
+    }
 }
 
 async function addMerchantId(id, merchant_id){
-    const body = await webpagesModel.findById(id);
-    body.merchant_id = merchant_id;
-    await webpagesModel.findByIdAndUpdate(id, body); //no regresa la info updateada
-    const newDataWebpage = await webpagesModel.findById(id);
-    return newDataWebpage;
+    try{
+        const body = await webpagesModel.findById(id);
+        body.merchant_id = merchant_id;
+        await webpagesModel.findByIdAndUpdate(id, body); //no regresa la info updateada
+        const newDataWebpage = await webpagesModel.findById(id);
+        return newDataWebpage;
+    }catch(err){
+        console.log(res);
+        handleHttpError(res, 'ERROR_ADDING_MERCHANTID_TO_USER');
+        return;
+    }
+
 }
 
 const updateWebpage = async (req,res)=>{
@@ -104,7 +117,7 @@ const cascadeDeleteWebpage = async (res, id)=>{
         return response;
     }catch(err){
         console.log(res);
-        handleHttpError(res, 'ERROR_DELETING_WEBPAGE');
+        handleHttpError(res, 'ERROR_CASCADE_DELETING_WEBPAGE');
     }
 }
 
@@ -121,7 +134,7 @@ const getWebpages = async (req,res)=>{
         res.send(data);
     }catch(err){
         console.log(res);
-        handleHttpError(res, 'ERROR_GETTING_ALL_WEBPAGE');
+        handleHttpError(res, 'ERROR_GETTING_ALL_WEBPAGES');
     }
 }
 

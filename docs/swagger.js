@@ -7,7 +7,7 @@ const options = {
         title: "Express API with Swagger (OpenAPI 3.0)",
         version: "0.1.0",
         description:
-          "This is a CRUD API application made with Express and documented with Swagger",
+          "This is a CRUD API that allows admins to create merchants, for merchants create webpages and upload their info there and for users to access this webpages to see the scoring and info and aslo leave a review if desired and registered",
         license: {
           name: "MIT",
           url: "https://spdx.org/licenses/MIT.html",

@@ -3,7 +3,6 @@ const { handleHttpError } = require('../utils/handleError');
 const { matchedData } = require('express-validator');
 const fs = require("fs");
 
-const PUBLIC_URL = process.env.PUBLIC_URL
 const MEDIA_PATH = __dirname + "/../storage"
 
 const getItems = async (req, res) => {
@@ -21,7 +20,7 @@ const getItem = async (req, res) => {
         const data = await storageModel.findById(id)
         res.send(data)
     } catch(err){
-        //console.log(err)
+        console.log(err)
         handleHttpError(res, "ERROR_GET_ITEM")
     }
 }

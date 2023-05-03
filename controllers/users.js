@@ -20,7 +20,7 @@ async function createMerchantUser(res, name, email){
         return data;
     }catch(err) {
         console.log(err);
-        handleHttpError(res, "ERROR_REGISTER_USER");
+        handleHttpError(res, "ERROR_REGISTER_MERCHANT_USER");
     }
 }
 

@@ -62,7 +62,7 @@ const getMerchant = async (req,res)=>{
         res.send(data);
     }catch(err){
         console.log(err);
-        handleHttpError(res, 'ERROR_GETING_MERCHANT_' + req.params.id);
+        handleHttpError(res, 'ERROR_GETTING_MERCHANT_' + req.params.id);
     }
 }
 
