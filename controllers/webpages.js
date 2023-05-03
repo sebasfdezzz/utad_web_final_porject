@@ -151,6 +151,13 @@ const getWebpage = async (req,res)=>{
 
 const getByCity = async (req,res)=>{
     try{
+        const scoring = req.query.scoring;
+        if(scoring){
+            const {city} = matchedData(req);
+            const data = await webpagesModel.find({city: city.toLowerCase()}).sort({scoring: -1});
+            res.send(data);
+            return;
+        }
         const {city} = matchedData(req);
         const data = await webpagesModel.find({city: city.toLowerCase()});
         res.send(data);
@@ -162,6 +169,13 @@ const getByCity = async (req,res)=>{
 
 const getByCityAndActivity = async (req,res)=>{
     try{
+        const scoring = req.query.scoring;
+        if(scoring){
+            const {city, activity} = matchedData(req);
+            const data = await webpagesModel.find({city: city.toLowerCase(), activity: activity.toLowerCase()}).sort({scoring: -1});
+            res.send(data);
+            return;
+        }
         const {city, activity} = matchedData(req);
         const data = await webpagesModel.find({city: city.toLowerCase(), activity: activity.toLowerCase()});
         res.send(data);

@@ -41,7 +41,7 @@ image_upload2.addEventListener("change", () => {
 
 upload_pair.addEventListener('click',async ()=>{
     const jwtToken = jwtTokenInput.value.trim();
-    const webpageId = document.getElementById("webpage-id").value.trim();
+    let webpageId = document.getElementById("webpage-id").value.trim();
     webpageId = webpageId.length ? webpageId : 'senslessid';
     
     let url = "http://localhost:3000/api/webpages/";
@@ -144,7 +144,7 @@ createButton.addEventListener('click',async (event)=>{
 updateButton.addEventListener('click',async (event)=>{
     event.preventDefault(); // prevent default form submission
     const jwtToken = jwtTokenInput.value.trim();
-    const webpageId = document.getElementById("webpage-id").value.trim();
+    let webpageId = document.getElementById("webpage-id").value.trim();
     const city = document.getElementById("city").value.trim().toLowerCase();
     const activity = document.getElementById("activity").value.trim().toLowerCase();
     const title = document.getElementById("title").value.trim();
@@ -172,7 +172,7 @@ updateButton.addEventListener('click',async (event)=>{
 deleteButton.addEventListener('click',async (event)=>{
     event.preventDefault(); // prevent default form submission
     const jwtToken = jwtTokenInput.value.trim();
-    const webpageId = document.getElementById("webpage-id").value.trim();
+    let webpageId = document.getElementById("webpage-id").value.trim();
     webpageId = webpageId.length ? webpageId : 'senslessid';
 
     // Define the request headers

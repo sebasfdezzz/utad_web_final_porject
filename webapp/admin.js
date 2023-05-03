@@ -30,8 +30,6 @@ cuestionario.addEventListener('submit', async (event) => {
     document.getElementById('dialog').innerHTML = `
         <a><b>JWT: </b>${response.merchantJWT}</a>
         <a><b>webpage_id: </b>${response.webpage_id}</a>`;
-    // Reset the form
-    cuestionario.reset();
 });
 
 update_btn.addEventListener('click', async() =>{

@@ -9,19 +9,20 @@ form.addEventListener('submit', async (e) => {
     const id = formData.get('id').trim();
     const city = formData.get('city').trim();
     const activity = formData.get('activity').trim();
-    const scoring = formData.get('scoring').trim();
+    const scoring = formData.get('scoring').trim() == 'Si' ? true : false;
 
-    let url = 'http://localhost:3000/api/webpages/';
-
+    let Baseurl = 'http://localhost:3000/api/webpages/';
+    let url;
     if(id.length){
-        const response = await getJSON(url + id);
+        const response = await getJSON(Baseurl + id);
         if(!response) return;
         right.innerHTML = oneRow(response);
         return;
     }
-    url += 'search/'
     if(activity.length){
-        const response = await getJSON(url + city + '/' +activity);
+        url = Baseurl + 'search/' + city + '/' +activity;
+        if(scoring) url += 'scoring=true';
+        const response = await getJSON(url);
         if(!response) return;
         for(let i=0; i<response.length; i++){
             right.innerHTML += oneRow(response[i]);
@@ -29,14 +30,18 @@ form.addEventListener('submit', async (e) => {
         return;
     }
     if(city.length){
-        const response = await getJSON(url + city);
+        url = Baseurl + 'search/' + city;
+        if(scoring) url += 'scoring=true';
+        const response = await getJSON(url);
         if(!response) return;
         for(let i=0; i<response.length; i++){
             right.innerHTML += oneRow(response[i]);
         }
         return;
     }
-    const response = await getJSON('http://localhost:3000/api/webpages/');
+    url = Baseurl;
+    if(scoring) url = 'http://localhost:3000/api/webpages?scoring=true';
+    const response = await getJSON(url);
     if(!response) return;
     for(let i=0; i<response.length; i++){
         if(!response[i].title) continue;
