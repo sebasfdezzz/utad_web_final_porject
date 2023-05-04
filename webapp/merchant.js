@@ -132,6 +132,7 @@ city_users_btn.addEventListener('click',async ()=>{
         }
     });
     if(!response) return;
+    document.getElementById('email_list').innerHTML = '';
     for(let i=0; i< response.length; i++){
         document.getElementById('email_list').innerHTML += `<p>${response[i]}</p><br></br>`
     }
