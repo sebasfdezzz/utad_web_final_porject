@@ -21,7 +21,7 @@ form.addEventListener('submit', async (e) => {
     }
     if(activity.length){
         url = Baseurl + 'search/' + city + '/' +activity;
-        if(scoring) url += 'scoring=true';
+        if(scoring) url += '?scoring=true';
         const response = await getJSON(url);
         if(!response) return;
         for(let i=0; i<response.length; i++){
@@ -31,7 +31,7 @@ form.addEventListener('submit', async (e) => {
     }
     if(city.length){
         url = Baseurl + 'search/' + city;
-        if(scoring) url += 'scoring=true';
+        if(scoring) url += '?scoring=true';
         const response = await getJSON(url);
         if(!response) return;
         for(let i=0; i<response.length; i++){

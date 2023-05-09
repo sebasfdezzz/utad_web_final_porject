@@ -143,7 +143,7 @@ GET http://localhost:3000/api/webpages/6446b829aead544582bbcc12
 ### users public and registered
 GET http://localhost:3000/api/webpages/search/madrid
 ### users public and registered
-GET http://localhost:3000/api/webpages/search/madrid/comida
+GET http://localhost:3000/api/webpages/search/madrid/comida?scoring=true
 
 ### registered users only
 PATCH http://localhost:3000/api/webpages/6446c5f04f0f9351fe031743
