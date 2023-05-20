@@ -2,8 +2,8 @@ token admin: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQyYTUyYzcwZjVmYj
 
 
 .env:
-DB_URI=mongodb+srv://root:root@cluster0.zyexovs.mongodb.net/?retryWrites=true&w=majority
+DB_URI=mongodb+srv: 
 PORT = 3000
 PUBLIC_URL=http://localhost:3000
-JWT_SECRET=mi_llave_maestra_wow
-SLACK_WEBHOOK=https://hooks.slack.com/services/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
+JWT_SECRET=mi_llave_maestr
+SLACK_WEBHOOK=https://hooks.slack.com/services
